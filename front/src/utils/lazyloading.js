@@ -1,7 +1,10 @@
 import { loadMiniChart } from "./tradingChart.js"
+import { destroyRange } from "./chartManager.js"
 
 export function enableCarouselWindow({ selector = ".carousel", getData, cardComponent }) {
- 
+
+  const initializedTickers = new Set()
+
   const chartObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -19,6 +22,7 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
                 loadMiniChart(ticker, historyData)
                 
                 el.dataset.initialized = "true"
+                initializedTickers.add(ticker)
                 observer.unobserve(el)
             } catch (e) {
                 console.error("Parsing history error for", ticker, e)
@@ -45,7 +49,7 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
   track.style.transition = "none"
   
   if (isFixed) {
-      track.style.justifyContent = "center"
+      track.classList.add("is-fixed")
   }
   
   carousel.appendChild(track)
@@ -66,15 +70,32 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
 
   render()
 
+  const baseCleanup = () => {
+    chartObserver.disconnect()
+    destroyRange([...initializedTickers])
+    carousel.dataset.bound = ""
+  }
+
   // on small list no scroll
-  if (isFixed) return
+  if (isFixed) return baseCleanup
 
   // infinite scroll for wide lists
- const getCardWidth = () => {
-    const firstCard = track.firstElementChild;
-    if (!firstCard) return 324; // Fallback par défaut (300 + 24)
-    const style = window.getComputedStyle(firstCard);
-    return firstCard.offsetWidth + parseInt(style.marginRight || 0) + parseInt(style.marginLeft || 0);
+  const remToPx = (remStr) => {
+    const rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize) || 16
+    return parseFloat(remStr) * rootFontSize
+  }
+
+  const getCardWidth = () => {
+    const firstCard = track.firstElementChild
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 24 // gap flexbox réel du track, pas un margin sur .card
+
+    if (firstCard) {
+      return firstCard.offsetWidth + gap
+    }
+
+    // Pas de carte à mesurer : on lit --card-w (source de vérité CSS, gère aussi le responsive)
+    const cardWidthRem = window.getComputedStyle(document.documentElement).getPropertyValue('--card-w').trim() || '9.5rem'
+    return remToPx(cardWidthRem) + gap
   };
 
   let currentX = 0;
@@ -82,12 +103,16 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
   const ease = 0.08;
   let isReorganizing = false;
   let cardWidth = getCardWidth(); // Calculé au chargement
+  let rafId = null;
+  let isDestroyed = false;
 
   // Recalcule si l'utilisateur redimensionne la fenêtre
-  window.addEventListener('resize', () => { cardWidth = getCardWidth(); });
+  const handleResize = () => { cardWidth = getCardWidth(); }
+  window.addEventListener('resize', handleResize);
 
   const updateLoop = () => {
-    if (isReorganizing) { requestAnimationFrame(updateLoop); return; }
+    if (isDestroyed) return;
+    if (isReorganizing) { rafId = requestAnimationFrame(updateLoop); return; }
     
     const distance = targetX - currentX;
     if (Math.abs(distance) > 0.05) {
@@ -126,15 +151,43 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
       }
       track.style.transform = `translateX(${-currentX}px)`;
     }
-    requestAnimationFrame(updateLoop);
+    rafId = requestAnimationFrame(updateLoop);
   }
 
-  requestAnimationFrame(updateLoop)
+  rafId = requestAnimationFrame(updateLoop)
 
-  carousel.addEventListener("wheel", (e) => {
+  const handleWheel = (e) => {
     e.preventDefault()
     e.stopPropagation()
     if (!e.deltaY) return
     targetX += e.deltaY * 1.2
-  }, { passive: false })
+  }
+  carousel.addEventListener("wheel", handleWheel, { passive: false })
+
+  // scroll au doigt (mobile/tactile)
+  let touchLastX = 0
+
+  const handleTouchStart = (e) => {
+    touchLastX = e.touches[0].clientX
+  }
+  const handleTouchMove = (e) => {
+    const x = e.touches[0].clientX
+    targetX += touchLastX - x
+    touchLastX = x
+  }
+
+  carousel.addEventListener("touchstart", handleTouchStart, { passive: true })
+  carousel.addEventListener("touchmove", handleTouchMove, { passive: true })
+
+  return () => {
+    isDestroyed = true
+    if (rafId) cancelAnimationFrame(rafId)
+    window.removeEventListener('resize', handleResize)
+    carousel.removeEventListener("wheel", handleWheel)
+    carousel.removeEventListener("touchstart", handleTouchStart)
+    carousel.removeEventListener("touchmove", handleTouchMove)
+    chartObserver.disconnect()
+    destroyRange([...initializedTickers])
+    carousel.dataset.bound = ""
+  }
 }

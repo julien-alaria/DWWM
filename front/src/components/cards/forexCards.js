@@ -8,7 +8,6 @@ export default function forexCard({
   high = 'N/A', 
   low = 'N/A', 
   close = 'N/A', 
-  image 
 } = {}) {
 
   const finalImage = formatAssetImage(ticker)
@@ -18,7 +17,7 @@ export default function forexCard({
 
       <img class="card-image-forex" src="${finalImage}" alt="${escapeHtml(ticker)}" onerror="this.onerror=null; this.src='/assets/nasdaq_logo.webp'">
 
-      <h2 class="card-title-forex">${escapeHtml(name)}</h2>
+      <h3 class="card-title-forex">${escapeHtml(name)}</h3>
 
       <p class="card-forex-ticker">Ticker: ${escapeHtml(ticker)}</p>
 

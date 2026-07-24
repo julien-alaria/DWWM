@@ -8,7 +8,6 @@ export default function commodityCard({
   price = 'N/A', 
   high = 'N/A', 
   low = 'N/A', 
-  image 
 } = {}) {
 
   const finalImage = formatAssetImage(ticker)
@@ -18,7 +17,7 @@ export default function commodityCard({
 
       <img class="card-commodity-image" src="${finalImage}" alt="${escapeHtml(ticker)}" onerror="this.onerror=null; this.src='/assets/nasdaq_logo.webp'">
 
-      <h2 class="card-commodity-title">${escapeHtml(name)}</h2>
+      <h3 class="card-commodity-title">${escapeHtml(name)}</h3>
 
       <p class="card-commodity-ticker">Ticker: ${escapeHtml(ticker)}</p>
 

@@ -5,11 +5,10 @@ import { formatChartId, escapeHtml } from "../../utils/format.js"
 export default function stockCard({
   ticker = 'N/A', 
   name = 'Unknown company', 
-  marketCap = 0, 
+  marketCap = 'N/A', 
   high = 'N/A', 
   low = 'N/A', 
-  image, 
-  price = "N/A",
+  price = 'N/A',
   history = []
 } = {}) {
 
@@ -23,7 +22,7 @@ export default function stockCard({
 
         <img class="card-stock-image" src="${finalImage}" alt="${escapeHtml(ticker)}" onerror="this.onerror=null; this.src='/assets/nasdaq_logo.webp'">
 
-        <h2 class="card-stock-title">${escapeHtml(name)}</h2>
+        <h3 class="card-stock-title">${escapeHtml(name)}</h3>
 
         <p class="card-stock-description">${escapeHtml(ticker)}</p>
 

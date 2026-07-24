@@ -100,6 +100,7 @@ The `back` and `front` folders are mounted as volumes into their respective cont
 | `docker compose down -v` | Stops everything **and removes the volumes** — the database starts from scratch |
 | `docker compose logs -f back` | Follows the back container's logs live |
 | `docker compose exec back env` | Shows the environment variables actually used by the container |
+| `docker exec -it your_database_name mysql -u your_user_name -p` | Opens a MySQL shell inside the database container |
 
 ## 8. Quick troubleshooting
 
