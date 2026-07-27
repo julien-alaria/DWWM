@@ -6,6 +6,7 @@
     --ad-fs-small: 0.85rem;
     --ad-pic: 7rem;
     --ad-reco-list-h: 24rem;
+    --ad-reco-list-c: 44rem;
 }
 
 /* Tablette */
@@ -17,6 +18,7 @@
         --ad-fs-small: 0.9rem;
         --ad-pic: 8.5rem;
         --ad-reco-list-h: 24rem;
+        --ad-reco-list-c: 48rem;
     }
 }
 
@@ -28,7 +30,8 @@
         --ad-fs-text: 1.125rem;
         --ad-fs-small: 0.95rem;
         --ad-pic: 10rem;
-        --ad-reco-list-h: 24rem;
+        --ad-reco-list-h: 26rem;
+        --ad-reco-list-c: 50rem;
     }
 }
 
@@ -159,6 +162,13 @@
     box-sizing: border-box;
 }
 
+#recommendations-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: var(--ad-reco-list-c);
+}
+
 .reco-image {
     width: 1.25rem;
     height: 1.25rem;
@@ -216,3 +226,5 @@
     gap: 0.5rem;
     margin-bottom: 1rem;
 }
+
+

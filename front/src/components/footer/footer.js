@@ -9,7 +9,7 @@ export default function footer() {
         <footer class="main-footer">
             <div class="footer-socials">
 
-                <div class="footer-nav">
+                <div class="footer-nav" id="footer-about">
                     ${navLink("/about", "ABOUT")}
                 </div>
 

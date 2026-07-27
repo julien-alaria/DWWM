@@ -181,7 +181,7 @@
 #reco-list-container {
     display: flex;
     flex-direction: column;
-    height: 36rem;        
+    height: 45rem;        
     overflow-y: auto;     
     flex: none;   
     width: 100%;
