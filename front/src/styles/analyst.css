@@ -13,7 +13,7 @@
 
     --watchlist-list-h: 24rem;      
     --follow-list-h: 24rem;         
-    --reco-list-h: 32rem;  
+    --reco-list-h: 42rem;  
 }
 
 /* Tablet */
@@ -31,7 +31,7 @@
 
         --watchlist-list-h: 27rem;   
         --follow-list-h: 27rem;    
-        --reco-list-h: 28rem; 
+        --reco-list-h: 42rem; 
     }
 }
 
@@ -138,26 +138,37 @@
     margin-top: 1.5rem;
 }
 
+/* RECOMMENDATION  */
+
 #recommendations-list-container .recommendation {
-    display: grid;
-    grid-template-columns: 1.25rem 3.5rem var(--an-list-img) minmax(0, 1fr) 6rem auto;
-    align-items: center;
-    gap: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
     width: 100%;
     padding: 0.625rem 0.75rem;
     border-bottom: 1px solid var(--color-border-light);
     box-sizing: border-box;
 }
 
+#recommendations-list-container .reco-line1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    width: 100%;
+}
+
 #recommendations-list-container .analyst-reco-img {
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
 }
 
-#recommendations-list-container .recommendation strong {
+#recommendations-list-container .reco-line1 > strong {
     font-size: var(--an-fs-text);
     color: var(--color-navy-400);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 #recommendations-list-container .analyst-logo-picture {
@@ -165,10 +176,12 @@
     height: var(--an-list-img);
     border-radius: 0;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 #recommendations-list-container .recommendation-comment {
-    min-width: 0;
+    flex: 1 1 auto;
+    min-width: 8rem;
     margin: 0;
     font-size: var(--an-fs-text);
     color: var(--color-text-muted);
@@ -177,30 +190,33 @@
     text-overflow: ellipsis;
 }
 
-#recommendations-list-container .recommendation small {
+#recommendations-list-container .reco-line1 > small {
     font-size: var(--an-fs-small);
     color: var(--color-text-faint);
-    text-align: right;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
-/* Actions (edit-form + delete) en une seule colonne compacte */
+#recommendations-list-container .reco-line2 {
+    width: 100%;
+}
+
 #recommendations-list-container .edit-form:not(.hidden) {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.4rem;
-    background: transparent;
-    padding: 0;
-    border: none;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 #recommendations-list-container .edit-form select,
 #recommendations-list-container .edit-form input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 6rem;
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--color-border);
     border-radius: 0.3rem;
     font-size: var(--an-fs-small);
-    width: 6rem;
     box-sizing: border-box;
 }
 
@@ -212,6 +228,7 @@
     font-size: var(--an-fs-small);
     cursor: pointer;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 #recommendations-list-container .edit-form button[type="submit"] {
@@ -219,35 +236,16 @@
     color: var(--color-white);
 }
 
+#recommendations-list-container .edit-form button[type="submit"]:hover {
+    background: var(--color-orange);
+    color: var(--color-dark);
+}
+
 #recommendations-list-container .delete-btn {
     background: var(--color-danger, #ff0000);
     color: var(--color-white);
 }
 
-.edit-form select,
-.edit-form input[type="text"] {
-    flex: 1 1 8rem;
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.375rem;
-    font-size: var(--an-fs-small);
-    box-sizing: border-box;
-}
-
-.edit-form button[type="submit"] {
-    background-color: var(--color-navy-400);
-    color: var(--color-white);
-    border: none;
-    border-radius: 0.375rem;
-    padding: 0.4rem 0.9rem;
-    font-size: var(--an-fs-small);
-    cursor: pointer;
-}
-
-.edit-form button[type="submit"]:hover {
-    background-color: var(--color-orange);
-    color: var(--color-dark);
-}
 /* watchlist / follow */
 #watchlist-list-target,
 #follow-list-target {
@@ -284,6 +282,18 @@
     height: var(--an-list-img);
     flex-shrink: 0;
     object-fit: contain;
+}
+
+#watchlist-pagination,
+#recommendations-pagination,
+#follow-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 1rem 0;
 }
 
 #follow-list-container {

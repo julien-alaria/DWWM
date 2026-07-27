@@ -161,22 +161,26 @@ export async function initAnalyst() {
 
         return `
           <div class="recommendation" data-js-clickable data-id="${rec.id}" data-ticker="${rec.ticker}" data-type="${rec.asset_type_id ?? 'asset'}">
-              <img src="${recoImage}" alt="reco-image" class="analyst-reco-img"/>
-              <strong>${rec.status}</strong>
-              <img src="${imageUrl}" class="analyst-logo-picture"  alt="analyst-picture" onerror="this.src='${defaultAvatar}'" />
-              <p class="recommendation-comment">${escapeHtml(rec.comment)}</p>
-              <small>${new Date(rec.created_at).toLocaleDateString()}</small>
+              <div class="reco-line1">
+                  <img src="${recoImage}" alt="reco-image" class="analyst-reco-img"/>
+                  <strong>${rec.status}</strong>
+                  <img src="${imageUrl}" class="analyst-logo-picture"  alt="analyst-picture" onerror="this.src='${defaultAvatar}'" />
+                  <p class="recommendation-comment">${escapeHtml(rec.comment)}</p>
+                  <small>${new Date(rec.created_at).toLocaleDateString()}</small>
+              </div>
               ${isAuthorized ? `
-                  <form class="edit-form hidden" data-id="${rec.id}">
-                      <select name="status">
-                          <option value="BUY">BUY</option>
-                          <option value="SELL">SELL</option>
-                          <option value="HOLD">HOLD</option>
-                      </select>
-                      <input name="comment" placeholder="comment" />
-                      <button type="submit">EDIT</button>
-                      <button class="delete-btn" data-id="${rec.id}">DELETE</button>
-                  </form>
+                  <div class="reco-line2">
+                      <form class="edit-form hidden" data-id="${rec.id}">
+                          <select name="status">
+                              <option value="BUY">BUY</option>
+                              <option value="SELL">SELL</option>
+                              <option value="HOLD">HOLD</option>
+                          </select>
+                          <input name="comment" placeholder="comment" />
+                          <button type="submit">EDIT</button>
+                          <button class="delete-btn" data-id="${rec.id}">DELETE</button>
+                      </form>
+                  </div>
               ` : ""}
           </div>
         `
