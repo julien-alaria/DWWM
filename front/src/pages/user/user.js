@@ -14,7 +14,7 @@ import { escapeHtml } from "../../utils/format.js"
 // HTML TEMPLATE
 // =====================
 const userPage = `
-    <h1>User Page</h1>
+    <h1 id="userh">My User Page</h1>
 
     <section>
         <div><img id="user_picture" src="" /></div>

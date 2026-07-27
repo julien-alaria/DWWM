@@ -16,7 +16,7 @@ import { escapeHtml } from "../../utils/format.js"
 // HTML TEMPLATE 
 // =====================
 const analystPage = `
-    <h1>Analyst Page</h1>
+    <h1 id="analysth">My Analyst Page</h1>
 
     <section>
         <div><img id="analyst_picture" src="" /></div>

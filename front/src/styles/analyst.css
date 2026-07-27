@@ -13,7 +13,7 @@
 
     --watchlist-list-h: 24rem;      
     --follow-list-h: 24rem;         
-    --reco-list-h: 24rem;  
+    --reco-list-h: 32rem;  
 }
 
 /* Tablet */
@@ -52,6 +52,10 @@
         --follow-list-h: 30rem;      
         --reco-list-h: 32rem;
     }
+}
+
+#analysth {
+    text-align: center;
 }
 
 /* PROFIL */

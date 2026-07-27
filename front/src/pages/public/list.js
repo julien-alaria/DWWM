@@ -5,7 +5,7 @@ import { formatAssetImage } from "../../utils/imageHelper.js"
 // HTML TEMPLATE 
 // =====================
 const list = `
-    <h1>All Assets List</h1>
+    <h1 id="all-assetsh" >All Assets List</h1>
     <div id="assets-list-target"></div>
 `
 

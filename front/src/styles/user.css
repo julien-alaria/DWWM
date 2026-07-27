@@ -45,6 +45,10 @@
     }
 }
 
+#userh {
+    text-align: center;
+}
+
 /* PROFIL  */
 #user_picture {
     display: block;

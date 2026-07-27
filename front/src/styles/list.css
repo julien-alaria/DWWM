@@ -23,6 +23,10 @@
     }
 }
 
+#all-assetsh {
+    text-align: center;
+}
+
 #assets-list-target,
 #assets-list-container {
     display: flex;
