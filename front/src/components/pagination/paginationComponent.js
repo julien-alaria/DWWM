@@ -7,7 +7,7 @@ export function createPaginationList({
   itemTemplate, 
   buildUrl,
   limit = 5,
-  emptyMessage = "No results recommendations yet" }) {
+  emptyMessage = "No recommendations yet" }) {
 
     const target = document.querySelector(targetSelector)
     if (!target) return null

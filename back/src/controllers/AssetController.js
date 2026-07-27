@@ -1,4 +1,5 @@
 import AssetModel from "../models/AssetModel.js"
+import AppError from "../utils/AppError.js"
 
 async function getAssetDetails(req, res, next) {
     try {
@@ -7,7 +8,7 @@ async function getAssetDetails(req, res, next) {
         const asset = await AssetModel.getAssetByTicker(ticker)
 
         if (!asset) {
-            return res.status(404).json({ message: "Asset not found in database" });
+            throw new AppError("Asset not found in database", 404)
         }
 
         return res.status(200).json(asset)

@@ -2,6 +2,7 @@ import UserModel from "../models/UserModel.js"
 import { sanitizeUser, sanitizeLogin } from "../utils/sanitizer.js"
 import { comparePassword } from "../utils/password.js"
 import generateToken from "../services/authTokenService.js"
+import AppError from "../utils/AppError.js"
 
 async function login(req, res, next) {
     try {
@@ -9,18 +10,18 @@ async function login(req, res, next) {
         const user = await UserModel.getUsersByEmail(email) 
 
         if (!user) {
-            return res.status(401).json({ message: "invalid credentials" }) 
+            throw new AppError("invalid credentials", 401)
         }
 
         const isMatch = await comparePassword(password, user.password)
 
         if(!isMatch) {
-            return res.status(401).json({ message: "invalid credentials" })
+            throw new AppError("invalid credentials", 401)
         }
 
         const token = generateToken(user)
 
-        res.status(200).json({ message: "authorized connexion", token })
+        res.status(200).json({ message: "authorized connection", token })
 
     } catch (error) {
         next(error)

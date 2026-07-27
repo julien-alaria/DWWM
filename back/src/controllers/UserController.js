@@ -1,6 +1,7 @@
 import UserModel from "../models/UserModel.js"
 import generateToken from "../services/authTokenService.js"
 import { sanitizeUser, sanitizeUserUpdate } from "../utils/sanitizer.js"
+import AppError from "../utils/AppError.js"
 
 async function getUserPagin(req, res, next) {
     try {
@@ -28,13 +29,13 @@ async function getMe(req, res, next) {
         const user_id = req.user.id
 
         if (!user_id) {
-            return res.status(401).json({ message: "Unauthorized" })
+            throw new AppError("Unauthorized" , 401)
         }
 
         const result = await UserModel.getUsersById(user_id)
 
         if (!result) {
-            return res.status(404).json({ message: "User not found" })
+            throw new AppError("User not found" , 404)
         }
 
         return res.status(200).json({ result })
@@ -49,13 +50,13 @@ async function getUserById(req, res, next) {
         const id = Number(req.params.id)
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ message : "Invalid ID" })
+            throw new AppError("Invalid ID", 400)
         }
 
         const result = await UserModel.getUsersById(id)
 
         if (!result) {
-            return res.status(404).json({ message: "User not found" })
+            throw new AppError("User not found" , 404)
         }
 
         res.status(200).json({ result })
@@ -105,7 +106,7 @@ async function updateUser(req, res, next) {
         const id = Number(req.params.id)
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ message: "Invalid ID" })
+            throw new AppError("Invalid ID" , 400)
         }
 
         // clean standard data (name, email, bio...) w/ basic sanitizer
@@ -130,9 +131,7 @@ async function updateUser(req, res, next) {
 
         // double-check if we have any data to update
         if (Object.keys(sanitizedData).length === 0) {
-            return res.status(400).json({
-                message: "No valid data"
-            })
+            throw new AppError("No valid data" , 400)
         }
 
         // send to the model (already knows how to handle analyst_verified)
@@ -160,9 +159,7 @@ async function updateMe(req, res, next) {
         if (sanitizedData.analyst_type_id !== undefined) delete sanitizedData.analyst_type_id
 
         if (Object.keys(sanitizedData).length === 0) {
-            return res.status(400).json({
-                message: "No valid data"
-            })
+            throw new AppError("No valid data" , 400)
         }
 
         const result = await UserModel.updateUsers(id, sanitizedData)
@@ -179,11 +176,11 @@ async function deleteUser(req, res, next) {
         const id = Number(req.params.id)
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ message: "Invalid ID" })
+            throw new AppError("Invalid ID", 400)
         }
 
         if (req.user.role !== "admin") {
-            return res.status(403).json({ message: "Forbidden" })
+            throw new AppError("Forbidden", 403)
         }
 
         await UserModel.deleteUsers(id)
@@ -215,7 +212,7 @@ async function getAnalystsById(req, res, next) {
         const analyst = await UserModel.getAnalystById(id)
 
         if (!analyst) {
-            return res.status(404).json({ message: "Analyst not found" })
+            throw new AppError("Analyst not found", 404)
         }
 
         res.status(200).json({ results: analyst})
@@ -229,7 +226,7 @@ async function getAnalystsByType(req, res, next) {
         const { type_id } = req.query
 
         if (!type_id) {
-            return res.status(400).json({ message: "Missing type_id parameter" })
+            throw new AppError("Missing type_id parameter", 400)
         }
 
         const limit = Math.max(1, Number.parseInt(req.query.limit ?? 10, 10))
@@ -268,9 +265,7 @@ async function followAsset(req, res, next) {
     } catch (error) {
 
         if (error.code === "ER_DUP_ENTRY") {
-            return res.status(409).json({
-                message: "Asset already followed"
-            })
+            throw new AppError("Asset already followed" , 409)
         } 
         next(error)
     }
@@ -316,7 +311,7 @@ async function followUser(req, res, next) {
         const followUser_id = Number(req.params.id)
 
         if (req.user.id === Number(req.params.id)) {
-            return res.status(400).json({ message: "Cannot follow yourself" });
+            throw new AppError("Cannot follow yourself", 400)
         }
 
         await UserModel.userFollowUser(user_id, followUser_id)
@@ -326,12 +321,10 @@ async function followUser(req, res, next) {
     } catch (error) {
 
         if (error.code === "ER_DUP_ENTRY") {
-        return res.status(409).json({
-            message: "User already followed"
-            })
-        } 
+        throw new AppError("User already followed", 409)
+        }
         next(error)
-    }
+    } 
 }
 
 async function unfollowUser(req, res, next) {

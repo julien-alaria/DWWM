@@ -1,6 +1,7 @@
 import RecommendationModel from "../models/RecommendationModel.js"
 import AssetModel from "../models/AssetModel.js"
 import { sanitizeRecommendation, sanitizeRecommendationUpdate } from "../utils/sanitizer.js"
+import AppError from "../utils/AppError.js"
 
 // GET
 async function getRecommendationPagin(req, res, next) {
@@ -13,7 +14,7 @@ async function getRecommendationPagin(req, res, next) {
         // FILTER BY ASSET (ticker)
         if (ticker) {
             const asset = await AssetModel.getAssetByTicker(ticker)
-            if (!asset) return res.status(404).json({ message: "Asset not found" });
+            if (!asset) throw new AppError("Asset not found", 404)
 
             const results = await RecommendationModel.getRecommendationsByAssetId(asset.id, limit, offset)
 
@@ -60,15 +61,15 @@ async function getMyRecommendation(req, res, next) {
 async function createRecommendation(req, res, next) {
     try {
         if (!req.asset) {
-            return res.status(400).json({ message: "Asset not resolved" })
+            throw new AppError("Asset not resolved", 400)
         }
 
         if (req.user.role === "analyst" && Number(req.user.analyst_verified) !== 1) {
-            return res.status(403).json({ message: "Your analyst account is pending validation. You cannot publish any recommendations." })
+            throw new AppError("Your analyst account is pending validation. You cannot publish any recommendations.", 403)
         }
 
         if (req.user.role === "analyst" && req.user.analyst_type_id !== req.asset.asset_type_id) {
-            return res.status(403).json({ message: "You are not authorized to post on this type of asset." })
+            throw new AppError("You are not authorized to post on this type of asset.", 403)
         }
 
         const sanitizedData = sanitizeRecommendation({
@@ -96,24 +97,25 @@ async function updateRecommendation(req, res, next) {
         const id = Number(req.params.id)
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ message: "Invalid ID" })
+            throw new AppError("Invalid ID", 400)
         }
 
         const sanitizedData = sanitizeRecommendationUpdate(req.body)
 
         if (Object.keys(sanitizedData).length === 0) {
-            return res.status(400).json({ message: "Invalid data" })
+            throw new AppError("Invalid data", 400)
         }
 
         const existing = await RecommendationModel.getRecommendationsById(id)
 
         if (!existing) {
-            return res.status(404).json({ message: "Recommendation not found" })
+            throw new AppError("Recommendation not found", 404)
         }
 
         // AUTHORIZATION
         if (req.user.role !== "admin" && existing.user_id !== req.user.id) {
-            return res.status(403).json({ message: "Update denied" })
+            throw new AppError("Update denied", 403)
+
         }
 
         const recommendation = await RecommendationModel.updateRecommendations(id, sanitizedData)
@@ -131,18 +133,18 @@ async function deleteRecommendation(req, res, next) {
         const id = Number(req.params.id)
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({ message: "Invalid ID" })
+            throw new AppError("Invalid ID", 400)
         }
 
         const existing = await RecommendationModel.getRecommendationsById(id)
 
         if (!existing) {
-            return res.status(404).json({ message: "Recommendation not found" })
+            throw new AppError("Recommendation not found", 404)
         }
 
         // AUTHORIZATION
         if (req.user.role !== "admin" && existing.user_id !== req.user.id) {
-            return res.status(403).json({ message: "Delete denied" })
+            throw new AppError("Delete denied", 403)
         }
 
         await RecommendationModel.deleteRecommendations(id)
