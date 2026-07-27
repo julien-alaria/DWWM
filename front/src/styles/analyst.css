@@ -229,21 +229,50 @@
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
 }
 
 #recommendations-list-container .edit-form button[type="submit"] {
-    background: var(--color-navy-400);
-    color: var(--color-white);
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.35) 0%,
+        rgba(29, 58, 143, 0.2) 100%);
+    border: 1px solid rgba(29, 58, 143, 0.3);
 }
 
 #recommendations-list-container .edit-form button[type="submit"]:hover {
-    background: var(--color-orange);
-    color: var(--color-dark);
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.45) 0%,
+        rgba(29, 58, 143, 0.3) 100%);
+    border-color: rgba(29, 58, 143, 0.5);
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 #recommendations-list-container .delete-btn {
-    background: var(--color-danger, #ff0000);
-    color: var(--color-white);
+    color: #b30000;
+    background: linear-gradient(180deg,
+        rgba(255, 180, 180, 0.35) 0%,
+        rgba(179, 0, 0, 0.18) 100%);
+    border: 1px solid rgba(179, 0, 0, 0.3);
+}
+
+#recommendations-list-container .delete-btn:hover {
+    color: #8a0000;
+    background: linear-gradient(180deg,
+        rgba(255, 180, 180, 0.45) 0%,
+        rgba(179, 0, 0, 0.28) 100%);
+    border-color: rgba(179, 0, 0, 0.5);
+    box-shadow:
+        0 4px 10px rgba(179, 0, 0, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 /* watchlist / follow */

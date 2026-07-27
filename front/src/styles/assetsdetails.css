@@ -323,12 +323,32 @@
     padding: 0.9rem 1rem;
     font-size: var(--de-fs-text);
     font-family: inherit;
-    border: 2px solid #1d3557;
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.3) 0%,
+        rgba(29, 58, 143, 0.15) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(29, 58, 143, 0.3);
     border-radius: 0.5rem;
-    background: #ffffff;
-    color: #03034B;
     box-sizing: border-box;
-    transition: border-color 0.2s ease;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+}
+
+#rec-form select:focus,
+#rec-form textarea:focus,
+#rec-form input:focus {
+    outline: none;
+    border-color: rgba(29, 58, 143, 0.5);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.4) 0%,
+        rgba(29, 58, 143, 0.2) 100%);
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 #rec-form textarea {
@@ -343,16 +363,29 @@
     font-size: var(--de-fs-text);
     font-weight: 600;
     color: #ffffff;
-    background: #03034B;
-    border: none;
+    background: linear-gradient(180deg,
+        rgba(29, 58, 143, 0.85) 0%,
+        rgba(3, 3, 75, 0.9) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
 }
 
 #rec-form button:hover {
-    background: orange;
+    background: linear-gradient(180deg,
+        rgba(255, 200, 120, 0.9) 0%,
+        rgba(255, 165, 0, 0.9) 100%);
+    border-color: rgba(3, 3, 75, 0.3);
     color: #1a1a1a;
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 #rec-form button:active {
