@@ -57,32 +57,21 @@ footer.main-footer {
 }
 
 /* ABOUT Link */
+/* ABOUT Link */
 .footer-nav a {
-    color: #ffffff;
-    font-size: var(--f-nav);
-    text-decoration: none;
-    transition: opacity 0.15s ease;
-}
-
-.footer-nav a:hover {
-    opacity: 0.8;
-}
-
-#footer-about {
     font-size: var(--f-icon);
     color: #ffffff;
     font-weight: 400;
     text-decoration: underline;
-    padding: 0.5rem 1rem;
+    padding: 0.1rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-#footer-about:hover {
-    background-color: orange;
-    border-color: #03034B;
-    color: #1a1a1a;
+.footer-nav a:hover {
+    color: orange;
+    text-decoration: none;
     transform: translateY(-1px);
 }
 

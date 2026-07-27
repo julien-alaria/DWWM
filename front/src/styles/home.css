@@ -117,10 +117,12 @@ main {
     transition: all 0.3s ease;
 }
 
-#nav-register,
+#nav-register:hover,
 #home-top-register:hover,
 #home-middle-register:hover {
-    background-color: orange;
+   background-image: linear-gradient(180deg,
+        #ffc878 0%,
+        #ffa500 100%);
     color: #1a1a1a;
 }
 
@@ -185,13 +187,29 @@ main {
     padding: 0.625rem 0.9375rem;
     font-size: 1rem;
     border-radius: 0.9375rem;
-    border: 1px solid #ccc;
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.3) 0%,
+        rgba(29, 58, 143, 0.15) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(29, 58, 143, 0.3);
     box-sizing: border-box;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
 }
 
 .search-input:focus {
     outline: none;
-    border-color: var(--color-navy-400, #03034B);
+    border-color: rgba(29, 58, 143, 0.5);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.4) 0%,
+        rgba(29, 58, 143, 0.2) 100%);
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 /* ACCESSIBILITY: restore a visible outline for keyboard navigation */
@@ -263,22 +281,33 @@ main {
     font-family: var(--font-display);
     font-size: var(--h-search-title);
     font-weight: 600;
-    color: #ffffff !important;
-    background-color: var(--color-navy-400, #03034B); /* fallback si gradient non supporté */
-    background-image: var(--gradient-button);
+    color: var(--color-navy-400) !important;
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.3) 0%,
+        rgba(29, 58, 143, 0.15) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
     text-decoration: none;
     padding: 0.65rem 1.5rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--color-navy-400, #03034B);
+    border: 1px solid rgba(29, 58, 143, 0.3);
+    box-sizing: border-box;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
     cursor: pointer;
-    transition: background-image 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    transition: all 0.2s ease;
 }
 
 #all-assets-btn:hover {
-    background-color: orange;
-    background-image: none;
-    border-color: #03034B;
-    color: #1a1a1a;
+    background: linear-gradient(180deg,
+        rgba(255, 200, 120, 0.5) 0%,
+        rgba(255, 165, 0, 0.35) 100%);
+    border-color: rgba(3, 3, 75, 0.4);
+    color: #1a1a1a !important;
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
     transform: translateY(-1px);
 }
 

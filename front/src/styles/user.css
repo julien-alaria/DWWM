@@ -52,12 +52,12 @@
 /* PROFIL  */
 #user_picture {
     display: block;
-    width: var(--u-pic);
-    height: var(--u-pic);
-    border-radius: 50%;
+    width: var(--ad-pic);
+    height: var(--ad-pic);
     object-fit: cover;
-    border: 4px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    border: 1px solid #1a1a1a;
+    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.4);
     margin: 0 auto;
 }
 

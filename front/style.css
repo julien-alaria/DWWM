@@ -9,7 +9,7 @@
 @import "./src//styles/footer.css";
 @import "./src/styles/auth.css";
 @import "./src/styles/navbar.css";
-@import "./src/utils/pagination.js";
+@import "./src/styles/pagination.css";
 @import "./src/styles/about.css";
 
 :root {

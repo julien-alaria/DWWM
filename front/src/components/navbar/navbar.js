@@ -11,9 +11,9 @@ export default function navbar() {
             ${user ? "" : navLink("/login", "Sign In", "nav-login")}
             ${user ? "" : navLink("/register", "CREATE FREE ACCOUNT", "nav-register")}
 
-            ${user?.role === "admin" ? navLink("/admin", "Connected", "nav-admin") : ""}
-            ${user?.role === "user" ? navLink("/user", "Connected", "nav-user") : ""}
-            ${user?.role === "analyst" ? navLink("/analyst", "Connected", "nav-analyst") : ""}
+            ${user?.role === "admin" ? navLink("/admin", "My Page", "nav-admin") : ""}
+            ${user?.role === "user" ? navLink("/user", "My Page", "nav-user") : ""}
+            ${user?.role === "analyst" ? navLink("/analyst", "My Page", "nav-analyst") : ""}
 
             ${user ? `<button id="logout-btn">Logout</button>` : ""}
         </nav>

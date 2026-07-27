@@ -16,6 +16,10 @@
     color: black;
 }
 
+#nav-login {
+    font-weight: bold;
+}
+
 #nav-register {
     border: 1px solid black;
     padding: 8px 16px;
@@ -43,6 +47,19 @@
     border: 1px solid white;
 }
 
+#nav-admin,
+#nav-user,
+#nav-analyst {
+    font-weight: bold;
+}
+
+#nav-login:hover,
+#nav-admin:hover,
+#nav-user:hover,
+#nav-analyst:hover {
+    color: #ffa500;
+}
+
 ul {
     list-style-type: none;
 }
@@ -57,17 +74,17 @@ a {
     font-size: var(--h-btn);
     color: #ffffff;
     font-weight: 400;
-    background-color: var(--color-navy-400, #03034B);
+    background-color: var(--color-dark, #03034B);
     text-decoration: none;
-    padding: 0.65rem 1.5rem;
+    padding: 0.4rem 1.5rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--color-navy-100);
+    border: 1px solid var(--color-bg-soft);
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 #logout-btn:hover {
-    background-color: orange;
+    background-image: linear-gradient(180deg,#ffc878 0%,#ffa500 100%);
     border-color: #03034B;
     color: #1a1a1a;
     transform: translateY(-1px);
@@ -94,7 +111,7 @@ a {
     #nav-admin,
     #nav-user,
     #nav-analyst {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         white-space: nowrap;
     }
 
