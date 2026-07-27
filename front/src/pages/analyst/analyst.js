@@ -22,9 +22,6 @@ const analystPage = `
         <div><img id="analyst_picture" src="" /></div>
         <div id="analyst_name"></div>
         <div id="analyst_email"></div>
-        <div id="analyst_type"></div>
-        <div id="analyst_company"></div>
-        <div id="analyst_bio"></div>
     </section>
 
     <section>
@@ -228,9 +225,6 @@ function renderAnalystInfo(user) {
   const map = {
     analyst_name: user.name,
     analyst_email: user.email,
-    analyst_type: user.analyst_type_id,
-    analyst_company: user.company,
-    analyst_bio: user.bio,
   }
 
   Object.entries(map).forEach(([id, value]) => {

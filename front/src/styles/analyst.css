@@ -358,17 +358,6 @@
     gap: 1rem;
 }
 
-/* Hides update form labels, similar to User and Auth */
-.update-form label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
 
 .update-form input[type="text"],
 .update-form input[type="email"],
