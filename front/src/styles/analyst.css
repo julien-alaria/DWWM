@@ -1,5 +1,4 @@
 /* TYPOGRAPHIC SCALE */
-
 /* Mobile */
 :root {
     --an-fs-h1: 1.875rem;
@@ -11,6 +10,10 @@
 
     --an-pic: 6.5rem;
     --an-list-img: 3rem;
+
+    --watchlist-list-h: 24rem;      
+    --follow-list-h: 24rem;         
+    --reco-list-h: 24rem;  
 }
 
 /* Tablet */
@@ -25,6 +28,10 @@
 
         --an-pic: 7.5rem;
         --an-list-img: 3.5rem;
+
+        --watchlist-list-h: 27rem;   
+        --follow-list-h: 27rem;    
+        --reco-list-h: 28rem; 
     }
 }
 
@@ -40,6 +47,10 @@
 
         --an-pic: 8.5rem;
         --an-list-img: 4rem;
+
+        --watchlist-list-h: 30rem;   
+        --follow-list-h: 30rem;      
+        --reco-list-h: 32rem;
     }
 }
 
@@ -123,63 +134,132 @@
     margin-top: 1.5rem;
 }
 
-/* RECOMMENDATIONS= */
-.recommendation {
-    padding: 0.625rem 0;
-    border-bottom: 1px solid var(--color-border-light);
-}
-
-.analyst-reco-img {
-    height: 1rem;
-    width: 1rem;
-}
-
-.analyst-logo-picture {
-    height: 2rem;
-    width: 2rem;
-}
-
-.recommendation-comment {
+#recommendations-list-container .recommendation {
+    display: grid;
+    grid-template-columns: 1.25rem 3.5rem var(--an-list-img) minmax(0, 1fr) 6rem auto;
+    align-items: center;
+    gap: 0.6rem;
     width: 100%;
-    margin-top: .5rem;
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid var(--color-border-light);
+    box-sizing: border-box;
 }
 
-#recommendations-list-target .recommendation strong {
+#recommendations-list-container .analyst-reco-img {
+    width: 1rem;
+    height: 1rem;
+}
+
+#recommendations-list-container .recommendation strong {
     font-size: var(--an-fs-text);
     color: var(--color-navy-400);
+    white-space: nowrap;
 }
 
-#recommendations-list-target .recommendation p {
+#recommendations-list-container .analyst-logo-picture {
+    width: var(--an-list-img);
+    height: var(--an-list-img);
+    border-radius: 0;
+    object-fit: contain;
+}
+
+#recommendations-list-container .recommendation-comment {
+    min-width: 0;
+    margin: 0;
     font-size: var(--an-fs-text);
     color: var(--color-text-muted);
-    margin: 0.15rem 0;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-#recommendations-list-target .recommendation small {
+#recommendations-list-container .recommendation small {
     font-size: var(--an-fs-small);
     color: var(--color-text-faint);
+    text-align: right;
+    white-space: nowrap;
 }
 
-.delete-btn {
+/* Actions (edit-form + delete) en une seule colonne compacte */
+#recommendations-list-container .edit-form:not(.hidden) {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+#recommendations-list-container .edit-form select,
+#recommendations-list-container .edit-form input[type="text"] {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    font-size: var(--an-fs-small);
+    width: 6rem;
+    box-sizing: border-box;
+}
+
+#recommendations-list-container .edit-form button[type="submit"],
+#recommendations-list-container .delete-btn {
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    font-size: var(--an-fs-small);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#recommendations-list-container .edit-form button[type="submit"] {
+    background: var(--color-navy-400);
     color: var(--color-white);
+}
+
+#recommendations-list-container .delete-btn {
+    background: var(--color-danger, #ff0000);
+    color: var(--color-white);
+}
+
+.edit-form select,
+.edit-form input[type="text"] {
+    flex: 1 1 8rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    font-size: var(--an-fs-small);
+    box-sizing: border-box;
+}
+
+.edit-form button[type="submit"] {
     background-color: var(--color-navy-400);
-    border: 1px solid var(--color-white);
-    border-radius: 5px;
+    color: var(--color-white);
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.4rem 0.9rem;
+    font-size: var(--an-fs-small);
+    cursor: pointer;
 }
 
-.edit-form {
-    padding: 0.2rem;
-    background-color: var(--color-navy-200);
-    border-radius: 5px;
+.edit-form button[type="submit"]:hover {
+    background-color: var(--color-orange);
+    color: var(--color-dark);
 }
-
 /* watchlist / follow */
 #watchlist-list-target,
 #follow-list-target {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+#watchlist-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--watchlist-list-h);
+    overflow-y: auto;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .watchlist-item,
@@ -202,6 +282,16 @@
     object-fit: contain;
 }
 
+#follow-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--follow-list-h);
+    overflow-y: auto;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .follow-item img {
     border-radius: 50%;
     object-fit: cover;
@@ -215,9 +305,18 @@
     word-break: break-word;
 }
 
+#recommendations-list-container {
+    height: var(--reco-list-h);
+    overflow-y: auto;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* PAGINATION */
 #watchlist-pagination,
-#follow-pagination {
+#follow-pagination,
+#recommendations-pagination {
     justify-content: center;
     align-items: center;
 }

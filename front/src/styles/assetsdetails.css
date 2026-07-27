@@ -8,6 +8,8 @@
     --de-logo: 6rem;
     --de-list-img: 3rem;
     --de-card: 10rem;
+    --reco-list-h: 36rem;
+    --analyst-list-h: 32rem;
 }
 
 /* Tablet */
@@ -21,6 +23,8 @@
         --de-logo: 7.5rem;
         --de-list-img: 3.5rem;
         --de-card: 11rem;
+        --reco-list-h: 40rem;
+        --analyst-list-h: 36rem;
     }
 }
 
@@ -35,6 +39,8 @@
         --de-logo: 9rem;
         --de-list-img: 4rem;
         --de-card: 12rem;
+        --reco-list-h: 44rem;
+        --analyst-list-h: 40rem;
     }
 }
 
@@ -158,11 +164,19 @@
 }
 
 /* RECOMMENDATIONS */
+#recommendation-target {
+    display: flex;
+    flex-direction: column;
+}
+
 #reco-list-container {
     display: flex;
     flex-direction: column;
+    height: 36rem;        
+    overflow-y: auto;     
+    flex: none;   
     width: 100%;
-    margin: 0 1rem 3rem;
+    margin: 0 1rem;
     box-sizing: border-box;
 }
 
@@ -235,6 +249,7 @@
 }
 
 #reco-pagination {
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
@@ -350,6 +365,8 @@
     flex-direction: column;
     width: 100%;
     gap: 0.25rem;
+    height: 32rem; 
+    overflow-y: auto;
 }
 
 #analyst-list-container .analyst-item {
@@ -380,4 +397,6 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    flex-shrink: 0;
+    margin-bottom: 2rem;
 }

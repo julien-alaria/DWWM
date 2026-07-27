@@ -1,4 +1,5 @@
 /* TYPOGRAPHIC SCALE */
+/* Mobile */
 :root {
     --u-fs-name: 1.5rem;
     --u-fs-text: 1rem;
@@ -8,6 +9,8 @@
     --u-fs-h2: 1.25rem;
     --u-pic: 6.5rem;
     --u-list-img: 3rem;
+    --watchlist-list-h: 24rem;
+    --follow-list-h: 24rem;
 }
 
 /* Tablet */
@@ -21,6 +24,8 @@
         --u-fs-h2: 1.5rem;
         --u-pic: 7.5rem;
         --u-list-img: 3.5rem;
+        --watchlist-list-h: 27rem;
+        --follow-list-h: 27rem;
     }
 }
 
@@ -35,6 +40,8 @@
         --u-fs-h2: 1.75rem;
         --u-pic: 8.5rem;
         --u-list-img: 4rem;
+        --watchlist-list-h: 30rem;
+        --follow-list-h: 30rem;
     }
 }
 
@@ -114,6 +121,16 @@
     width: 100%;
 }
 
+#watchlist-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--watchlist-list-h);
+    overflow-y: auto;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .watchlist-item,
 .follow-item {
     display: flex;
@@ -132,6 +149,16 @@
     height: var(--u-list-img);
     flex-shrink: 0;
     object-fit: contain;
+}
+
+#follow-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--follow-list-h);
+    overflow-y: auto;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .follow-item img {

@@ -24,7 +24,7 @@ const adminPage = `
 
     <section>
         <h2>All Recommendations</h2>
-        <div id="recommendations-list-target"></div>
+        <div id="adminreco-list-target"></div>
     </section>
 
     <section>
@@ -76,39 +76,43 @@ export async function initAdmin() {
 
         // ALL RECOMMENDATIONS PAGINATOR
         recommendationsPaginator = createPaginationList({
-            targetSelector: "#recommendations-list-target",
-            prefix: "recommendations",
+            targetSelector: "#adminreco-list-target",
+            prefix: "adminreco",
             endpoint: "/recommendations",
             itemTemplate: (rec) => {
                 const isMine = Number(user.id) === Number(rec.user_id)
 
                 return `
-                <div class="recommendation" data-id="${rec.id}">
-                    <strong>${rec.status}</strong>
-                    <p>${escapeHtml(rec.comment)}</p>
+                <div class="admin-recommendation" data-id="${rec.id}">
+                    <div class="reco-line1">
+                        <strong>${rec.status}</strong>
+                        <p class="reco-comment">${escapeHtml(rec.comment)}</p>
 
-                    <div class="meta">
-                        <span>Analyst: <strong>${rec.analyst_name}</strong></span>
-                        ${isMine ? '<span class="badge">Me</span>' : ''}
+                        <div class="meta">
+                            <span>Analyst: <strong>${rec.analyst_name}</strong></span>
+                            ${isMine ? '<span class="badge">Me</span>' : ''}
+                        </div>
+
+                        <p class="reco-asset">Asset: ${rec.name} (${rec.ticker})</p>
                     </div>
 
-                    <p>Asset: ${rec.name} (${rec.ticker})</p>
+                    <div class="reco-line2">
+                        <button class="delete-btn" data-id="${rec.id}">
+                            DELETE
+                        </button>
 
-                    <button class="delete-btn" data-id="${rec.id}">
-                        DELETE
-                    </button>
+                        <form class="edit-form hidden" data-id="${rec.id}">
+                            <select name="status">
+                                <option value="BUY" ${rec.status === "BUY" ? "selected" : ""}>BUY</option>
+                                <option value="SELL" ${rec.status === "SELL" ? "selected" : ""}>SELL</option>
+                                <option value="HOLD" ${rec.status === "HOLD" ? "selected" : ""}>HOLD</option>
+                            </select>
 
-                    <form class="edit-form hidden" data-id="${rec.id}">
-                        <select name="status">
-                            <option value="BUY" ${rec.status === "BUY" ? "selected" : ""}>BUY</option>
-                            <option value="SELL" ${rec.status === "SELL" ? "selected" : ""}>SELL</option>
-                            <option value="HOLD" ${rec.status === "HOLD" ? "selected" : ""}>HOLD</option>
-                        </select>
+                            <input name="comment" value="${escapeHtml(rec.comment)}" required />
 
-                        <input name="comment" value="${escapeHtml(rec.comment)}" required />
-
-                        <button type="submit">EDIT</button>
-                    </form>
+                            <button type="submit">EDIT</button>
+                        </form>
+                    </div>
                 </div>
                 `
             },
@@ -136,7 +140,7 @@ export async function initAdmin() {
         await loadPendingAnalysts()
 
         // Linking local business event listeners
-        bindRecommendationActions("#recommendations-list-target", recommendationsPaginator)
+        bindRecommendationActions("#adminreco-list-target", recommendationsPaginator)
         bindUserListEvents()
         initForm(user)
 

@@ -3,13 +3,30 @@
     --adm-title: 1.1rem;
     --adm-text: 0.95rem;
     --adm-btn: 0.85rem;
+
+    --adminreco-list-h: 50rem;   
+    --users-list-h: 40rem;      
+}
+
+@media (min-width: 48rem) {
+    :root {
+        --adm-title: 1.2rem;
+        --adm-text: 1rem;
+        --adm-btn: 0.9rem;
+
+        --adminreco-list-h: 30rem;
+        --users-list-h: 20rem;
+    }
 }
 
 @media (min-width: 64rem) {
     :root {
         --adm-title: 1.25rem;
-        --adm-text: 1rem;
-        --adm-btn: 0.9rem;
+        --adm-text: 1.0625rem;
+        --adm-btn: 0.95rem;
+
+        --adminreco-list-h: 30rem;
+        --users-list-h: 20rem;
     }
 }
 
@@ -114,10 +131,10 @@
     max-width: 100%;
 }
 
-/* LISTS + LINES */
-.admin-layout #users-list,
+/* LISTS + LINES (wrappers -target : layout column) */
+.admin-layout #users-list-target,
 .admin-layout #pending-analysts,
-.admin-layout #recommendations-list-target,
+.admin-layout #adminreco-list-target,
 .admin-layout #watchlist-list-target {
     display: flex;
     flex-direction: column;
@@ -125,10 +142,34 @@
     margin-top: 0.75rem;
 }
 
+/* CONTAINERS réels : hauteur stable pour éviter le déplacement des boutons prev/next */
+.admin-layout #adminreco-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--adminreco-list-h);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-layout #users-list-container {
+    display: flex;
+    flex-direction: column;
+    height: var(--users-list-h);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* pending-analysts : pas de pagination pour l'instant, aucune hauteur fixe nécessaire */
+
+/* ===== USER-ITEM / WATCHLIST-ITEM (colonne mobile → ligne dès 48rem) ===== */
 .admin-layout .user-item,
-.admin-layout .recommendation,
-.admin-layout .watchlist-item,
-.admin-layout #pending-analysts > div:not(.header-row) {
+.admin-layout .watchlist-item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -142,9 +183,7 @@
 
 @media (min-width: 48rem) {
     .admin-layout .user-item,
-    .admin-layout .recommendation,
-    .admin-layout .watchlist-item,
-    .admin-layout #pending-analysts > div:not(.header-row) {
+    .admin-layout .watchlist-item {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -154,63 +193,151 @@
 }
 
 .admin-layout .user-item > span,
-.admin-layout .user-item > div,
-.admin-layout .recommendation > div,
-.admin-layout #pending-analysts > div > span {
+.admin-layout .user-item > div {
     font-size: var(--adm-text);
     min-width: 0;
     overflow-wrap: anywhere;
 }
 
-/* Buttons */
-.admin-layout .user-item button,
-.admin-layout .recommendation button,
-.admin-layout .recommendation input[type="submit"],
-.admin-layout #pending-analysts button,
-.admin-layout .btn-approve,
-.admin-layout .btn-update,
-.admin-layout .btn-delete,
-.admin-layout .admin-table .approve-btn {
-    flex-shrink: 0;
-}
-
-.admin-layout #pending-analysts > .header-row {
-    display: none;
-}
-
-.admin-layout .user-item > div,
-.admin-layout .recommendation > div {
+.admin-layout .user-item > div {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.admin-layout .recommendation p {
+/* ===== RECOMMENDATION — grâce aux wrappers .reco-line1/.reco-line2 du template JS :
+   ligne 1 = statut + commentaire + Analyst + Asset + DELETE (coexistent, wrap naturel)
+   ligne 2 = uniquement le formulaire d'édition ===== */
+
+.admin-layout .admin-recommendation {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.4rem;
+    padding: 0.75rem 0.9375rem;
+    margin: 0;
+    border-bottom: 1px solid #e3e6ec;
     width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-layout .admin-recommendation .reco-line1,
+.admin-layout .admin-recommendation .reco-line2 {
+    width: 100% !important;
+}
+
+/* Ligne 1 : tout sauf le formulaire */
+.admin-layout .admin-recommendation .reco-line1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    width: 100%;
+}
+
+.admin-layout .admin-recommendation .reco-line1 > strong {
+    flex: 0 0 auto;
+    font-size: var(--adm-text);
+    color: #03034B;
+    white-space: nowrap;
+}
+
+.admin-layout .admin-recommendation .reco-comment {
+    flex: 1 1 auto;
+    min-width: 8rem;
+    margin: 0;
+    font-weight: 500;
+    font-size: var(--adm-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 0;
-    font-weight: 500;
 }
 
-.admin-layout .recommendation form {
+.admin-layout .admin-recommendation .meta {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--adm-text);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.admin-layout .admin-recommendation .meta .badge {
+    background-color: #dbe02c;
+    color: #000000;
+    border: 1px solid #a3a815;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    font-size: var(--adm-btn);
+    font-weight: bold;
+}
+
+.admin-layout .admin-recommendation .reco-asset {
+    flex: 1 1 auto;
+    min-width: 8rem;
+    margin: 0;
+    font-weight: 500;
+    font-size: var(--adm-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-layout .admin-recommendation .delete-btn {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.375rem 1.125rem;
+    font-size: var(--adm-btn);
+    cursor: pointer;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Ligne 2 : DELETE + formulaire d'édition (coexistent, wrap naturel si trop étroit) */
+.admin-layout .admin-recommendation .reco-line2 {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.625rem;
+    width: 100%;
 }
 
-.admin-layout .recommendation select,
-.admin-layout .recommendation input[type="text"] {
+.admin-layout .admin-recommendation .edit-form:not(.hidden) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 1 auto;
+    min-width: 12rem;
+}
+
+.admin-layout .admin-recommendation .edit-form select,
+.admin-layout .admin-recommendation .edit-form input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
     padding: 0.3125rem 0.5rem;
     border: 1px solid #cccccc;
     border-radius: 0.25rem;
     font-size: var(--adm-btn);
+    box-sizing: border-box;
 }
 
-/* TABLE */
+/* Fix : le bouton EDIT réel est un <button type="submit"> dans .edit-form, pas .edit-btn/input[type=submit] */
+.admin-layout .admin-recommendation .edit-form button[type="submit"] {
+    background-color: #dbe02c;
+    color: #000000;
+    border: 1px solid #a3a815;
+    border-radius: 1.25rem;
+    padding: 0.3125rem 1.25rem;
+    font-size: var(--adm-btn);
+    cursor: pointer;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* ===== PENDING ANALYSTS (table) ===== */
 .admin-layout .admin-table {
     display: flex;
     flex-direction: column;
@@ -231,9 +358,11 @@
 .admin-layout .admin-table tr {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;      /* centrage demandé */
+    text-align: center;       /* centrage demandé */
+    gap: 0.4rem;
     width: 100%;
-    padding: 0.75rem 0.875rem;
+    padding: 1rem 0.875rem;
     border: 1px solid #e3e6ec;
     border-radius: 0.75rem;
     background-color: #ffffff;
@@ -242,7 +371,7 @@
 }
 
 .admin-layout .admin-table td {
-    text-align: left;
+    text-align: center;
     padding: 0;
     border: none;
     font-size: var(--adm-text);
@@ -255,37 +384,9 @@
 }
 
 .admin-layout .admin-table td:last-child {
-    order: -1;                 
-    align-self: flex-start;    
+    order: -1;
+    align-self: center;       /* centrage demandé (était flex-start) */
     margin: 0.25rem 0 0.5rem;
-}
-
-/*BUTTONS */
-.admin-layout .user-item button:first-of-type,
-.admin-layout .btn-update,
-.admin-layout .recommendation button.edit-btn,
-.admin-layout .recommendation input[type="submit"] {
-    background-color: #dbe02c;
-    color: #000000;
-    border: 1px solid #a3a815;
-    border-radius: 1.25rem;
-    padding: 0.3125rem 1.25rem;
-    font-size: var(--adm-btn);
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.admin-layout .user-item button:last-of-type,
-.admin-layout .recommendation button:last-of-type,
-.admin-layout .btn-delete {
-    background-color: #ff0000;
-    color: #ffffff;
-    border: none;
-    border-radius: 0.25rem;
-    padding: 0.375rem 1.125rem;
-    font-size: var(--adm-btn);
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .admin-layout #pending-analysts button,
@@ -299,16 +400,37 @@
     font-size: var(--adm-btn);
 }
 
-.admin-layout button#next,
-.admin-layout .recommendation + button,
-.admin-layout #users-list + button {
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    padding: 0.3125rem 0.9375rem;
+/* ===== PAGINATION (centrée, comme sur les autres pages du site) ===== */
+.admin-layout #adminreco-pagination,
+.admin-layout #users-pagination {
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* BUTTONS user-item / watchlist-item */
+.admin-layout .user-item button:first-of-type,
+.admin-layout .btn-update {
+    background-color: #dbe02c;
+    color: #000000;
+    border: 1px solid #a3a815;
+    border-radius: 1.25rem;
+    padding: 0.3125rem 1.25rem;
     font-size: var(--adm-btn);
     cursor: pointer;
-    margin-top: 0.9375rem;
-    align-self: flex-start;
+    font-weight: 500;
+}
+
+.admin-layout .user-item button:last-of-type,
+.admin-layout .btn-delete {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.375rem 1.125rem;
+    font-size: var(--adm-btn);
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /* UPDATE FORM */
