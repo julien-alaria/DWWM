@@ -78,23 +78,24 @@
     transform: scale(1.02);
 }
 
-.card.stock,
+.card.stock {
+    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
+    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
+}
+
 .card.forex {
-    background: lightgray;
-    color: grey;
-    border: 2px solid black;
+    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
+    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
 }
 
 .card.commodity {
-    background: rgba(124, 122, 122, 0.938);
-    color: grey;
-    border: 2px solid rgba(0, 0, 0, 0.619);
+    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
+    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
 }
 
 .card.analyst {
-    background: rgb(209, 208, 209);
-    color: black;
-    border: 2px solid black;
+    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
+    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
 }
 
 /* IMAGES */
@@ -112,13 +113,11 @@
 }
 
 .card-image-forex {
-    border: 1px solid black;
     border-radius: 0.9375rem;
 }
 
 .card-analyst-image {
     object-fit: cover;
-    border: 1px solid black;
     border-radius: 0.9375rem;
 }
 
@@ -195,7 +194,6 @@
     background: white;
     border-radius: 0.9375rem;
     margin-top: 0.3rem;
-    border: 1px solid black;
     overflow: hidden;
     position: relative;
     pointer-events: none;

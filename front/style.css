@@ -148,6 +148,53 @@ section {
     --color-overlay-faint: rgba(255, 255, 255, 0.2);
     --color-shadow-soft: rgba(0, 0, 0, 0.04);
     --color-shadow: rgba(0, 0, 0, 0.15);
+
+    /* ======================================================================
+       GRADIENTS
+       ====================================================================== */
+
+    --gradient-navy-100-200:
+        linear-gradient(180deg,
+            var(--color-navy-100),
+            var(--color-navy-200));
+
+    --gradient-navy-200-300:
+        linear-gradient(180deg,
+            var(--color-navy-200),
+            var(--color-navy-300));
+
+    --gradient-navy-300-400:
+        linear-gradient(180deg,
+            var(--color-navy-300),
+            var(--color-navy-400));
+
+    --gradient-navy-400-500:
+        linear-gradient(180deg,
+            var(--color-navy-400),
+            var(--color-navy-500));
+
+    --gradient-navy:
+        linear-gradient(180deg,
+            var(--color-navy-100) 0%,
+            var(--color-navy-200) 25%,
+            var(--color-navy-300) 50%,
+            var(--color-navy-400) 75%,
+            var(--color-navy-500) 100%);
+
+    --gradient-button:
+        linear-gradient(180deg,
+            var(--color-navy-300),
+            var(--color-navy-400));
+
+    --gradient-button-hover:
+        linear-gradient(180deg,
+            var(--color-navy-200),
+            var(--color-navy-300));
+
+    --gradient-orange:
+        linear-gradient(180deg,
+            var(--color-orange),
+            var(--color-orange-dark));
 }
 
 
