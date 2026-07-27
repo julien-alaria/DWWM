@@ -159,7 +159,6 @@ function bindFollowButton(analystId) {
             }
         } catch (err) {
             console.error("Follow/Unfollow error:", err)
-            alert("Unable to update folow feature")
         } finally {
             btn.disabled = false
         }

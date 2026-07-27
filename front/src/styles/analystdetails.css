@@ -5,6 +5,7 @@
     --ad-fs-text: 1rem;
     --ad-fs-small: 0.85rem;
     --ad-pic: 7rem;
+    --ad-reco-list-h: 24rem;
 }
 
 /* Tablette */
@@ -15,6 +16,7 @@
         --ad-fs-text: 1.0625rem;
         --ad-fs-small: 0.9rem;
         --ad-pic: 8.5rem;
+        --ad-reco-list-h: 24rem;
     }
 }
 
@@ -26,6 +28,17 @@
         --ad-fs-text: 1.125rem;
         --ad-fs-small: 0.95rem;
         --ad-pic: 10rem;
+        --ad-reco-list-h: 24rem;
+    }
+}
+
+/* Très grands écrans (≥90rem / ~1440px) : agrandit uniquement les polices
+   utilisées par la section recommandations (titre + items) */
+@media (min-width: 90rem) {
+    :root {
+        --ad-fs-h2: 2rem;
+        --ad-fs-text: 1.25rem;
+        --ad-fs-small: 1.05rem;
     }
 }
 
@@ -122,11 +135,16 @@
     margin: 1.5rem 0 1rem;
 }
 
-/* RECOMMENDATIONS  */
+/* RECOMMENDATIONS */
 #analyst-reco-list-container {
     display: flex;
     flex-direction: column;
+    height: var(--ad-reco-list-h);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: none;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .analyst-recommendation {

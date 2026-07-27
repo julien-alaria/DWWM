@@ -9,7 +9,7 @@ export default function navbar() {
         <nav class="main-navbar">
             ${navLink("/", "TRADER TRACKER", "nav-home")}
            
-            ${user ? "" : navLink("/login", "Sign In |", "nav-login")}
+            ${user ? "" : navLink("/login", "Sign In", "nav-login")}
             ${user ? "" : navLink("/register", "CREATE FREE ACCOUNT", "nav-register")}
 
             ${user?.role === "admin" ? navLink("/admin", "Admin",  "nav-admin") : ""}

@@ -44,6 +44,15 @@
     }
 }
 
+@media (min-width: 90rem) {
+    :root {
+        --de-fs-h2: 2rem;
+        --de-fs-text: 1.25rem;
+        --de-fs-small: 1.05rem;
+        --de-fs-list: 1.3rem;
+    }
+}
+
 /* ASSET HEADER */
 #asset-detail {
     width: 100%;

@@ -128,3 +128,16 @@ a {
 }
 
 /* DESKTOP (>= 1024px) : (2rem) */
+@media (min-width: 1024px) {
+ 
+    #nav-register {
+        font-size: 1.15rem;
+        padding: 10px 20px;
+        white-space: nowrap;
+    }
+ 
+    #logout-btn {
+        font-size: 1.15rem;
+        white-space: nowrap;
+    }
+}

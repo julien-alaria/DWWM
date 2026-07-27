@@ -197,13 +197,29 @@
 
 #register-text a {
     display: inline-block;
-    font-size: var(--au-title);
-    color: black;
-    font-weight: bold;
-    text-decoration: underline;
+    font-size: var(--au-btn);
+    font-weight: 600;
+    color: #ffffff !important;
+    background-color: #03034B;
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #03034B;
+    cursor: pointer;
     margin-bottom: 2rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
-
+ 
+#register-text a:hover {
+    background-color: orange;
+    border-color: #03034B;
+    color: #1a1a1a !important;
+    transform: translateY(-1px);
+}
+ 
+#register-text a:active {
+    transform: translateY(0);
+}
 #message {
     text-align: center;
     font-size: var(--au-text);

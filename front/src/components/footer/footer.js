@@ -31,7 +31,7 @@ export default function footer() {
             </div>
 
             <div class="footer-bottom">
-                <span>© 2026 Trader Tracker. All rights reserved.</span>
+                <span>© ${new Date().getFullYear()} Trader Tracker. All rights reserved.</span>
             </div>
         </footer>
     `

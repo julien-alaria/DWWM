@@ -35,6 +35,7 @@ export function loadTradingViewChart(ticker, historyData = []) {
     chart: {
       type: "candlestick",
       height: 350,
+      fontFamily: 'Inter, sans-serif',
       sparkline: {
         enabled: false
       },

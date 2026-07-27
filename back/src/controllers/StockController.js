@@ -79,6 +79,10 @@ export async function getCombinedBriefAssets(req, res, next) {
             ])
             
             const allAssets = [...stocks, ...forex, ...commodities]
+
+            allAssets.sort((a, b) =>
+                (a.name ?? "").localeCompare(b.name ?? "", "fr", { sensitivity: "base" })
+            )
             
             const results = allAssets.slice(offset, offset + limit + 1)
             

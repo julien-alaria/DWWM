@@ -238,14 +238,38 @@ main {
     font-size: var(--h-section-text);
     text-align: center;
     margin: 0 0 1rem;
+    max-width: 60ch;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 /* "All Assets By List" Button */
 #all-assets-btn {
+    display: inline-block;
     font-size: var(--h-btn);
-    color: var(--color-navy-400, #03034B);
-    text-decoration: underline;
-    padding: 0.3rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    background-color: var(--color-navy-400, #03034B);
+    text-decoration: none;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-navy-400, #03034B);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+#all-assets-btn:hover {
+    background-color: orange;
+    border-color: #03034B;
+    color: #1a1a1a !important;
+    transform: translateY(-1px);
+}
+
+#all-assets-btn:active {
+    transform: translateY(0);
 }
 
 /* CARROUSELS */
