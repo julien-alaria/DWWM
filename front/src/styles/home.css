@@ -76,11 +76,22 @@ main {
 
 /* Blue progression: hero slightly lighter, middle band deeper */
 #home-top {
-    background-color: var(--color-navy-200, #102a72);
+    background-color: var(--color-navy-200);
+    background-image: linear-gradient(180deg,
+        var(--color-navy-100) 0%,
+        var(--color-navy-300) 100%);
 }
 
 #home-middle {
-    background-color: var(--color-navy-300, #081f5c);
+    background-color: var(--color-navy-300);
+    background-image: linear-gradient(180deg,
+        var(--color-navy-200) 0%,
+        var(--color-navy-400) 100%);
+}
+
+#home-middle,
+#footer-container {
+    box-shadow: inset 0 8px 12px -8px rgba(0, 0, 0, 0.35);
 }
 
 #home-top-title {
@@ -249,22 +260,25 @@ main {
 /* "All Assets By List" Button */
 #all-assets-btn {
     display: inline-block;
-    font-size: var(--h-btn);
+    font-family: var(--font-display);
+    font-size: var(--h-search-title);
     font-weight: 600;
     color: #ffffff !important;
-    background-color: var(--color-navy-400, #03034B);
+    background-color: var(--color-navy-400, #03034B); /* fallback si gradient non supporté */
+    background-image: var(--gradient-button);
     text-decoration: none;
     padding: 0.65rem 1.5rem;
     border-radius: 0.5rem;
     border: 1px solid var(--color-navy-400, #03034B);
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    transition: background-image 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 #all-assets-btn:hover {
     background-color: orange;
+    background-image: none;
     border-color: #03034B;
-    color: #1a1a1a !important;
+    color: #1a1a1a;
     transform: translateY(-1px);
 }
 

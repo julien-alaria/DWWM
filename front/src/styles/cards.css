@@ -78,24 +78,11 @@
     transform: scale(1.02);
 }
 
-.card.stock {
-    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
-    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
-}
-
-.card.forex {
-    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
-    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
-}
-
-.card.commodity {
-    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
-    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
-}
-
+.card.stock,
+.card.forex,
+.card.commodity,
 .card.analyst {
-    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30,55,90,.6));
-    border: 2px solid linear-gradient(160deg, rgba(7, 9, 10, 0.233), rgba(30,55,90,.6));
+    background: linear-gradient(160deg, rgba(53, 72, 94, 0.226), rgba(30, 55, 90, 0.6));
 }
 
 /* IMAGES */
@@ -280,9 +267,4 @@
     margin: 0;
     color: #666;
     font-size: 0.9rem;
-}
-
-#all-assets-btn {
-    font-size: 2rem;
-    color: #1a1a1a;
 }
