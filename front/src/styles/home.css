@@ -332,6 +332,7 @@ main {
 #analysts-carousel-target {
     width: 100%;
     display: block;
+    padding-top: 1rem;
     overflow: hidden;
     box-sizing: border-box;
 }
