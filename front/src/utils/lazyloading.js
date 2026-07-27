@@ -87,71 +87,70 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
 
   const getCardWidth = () => {
     const firstCard = track.firstElementChild
-    const gap = parseFloat(window.getComputedStyle(track).gap) || 24 // gap flexbox réel du track, pas un margin sur .card
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 24 // actual flexbox gap of the track, not a margin on .card
 
     if (firstCard) {
       return firstCard.offsetWidth + gap
     }
 
-    // Pas de carte à mesurer : on lit --card-w (source de vérité CSS, gère aussi le responsive)
+    // --card-w (CSS source of truth; also handles responsiveness)
     const cardWidthRem = window.getComputedStyle(document.documentElement).getPropertyValue('--card-w').trim() || '9.5rem'
     return remToPx(cardWidthRem) + gap
   };
 
-  let currentX = 0;
-  let targetX = 0;
-  const ease = 0.08;
-  let isReorganizing = false;
-  let cardWidth = getCardWidth(); // Calculé au chargement
-  let rafId = null;
-  let isDestroyed = false;
+  let currentX = 0
+  let targetX = 0
+  const ease = 0.08
+  let isReorganizing = false
+  let cardWidth = getCardWidth() // Calculated on load
+  let rafId = null
+  let isDestroyed = false
 
-  // Recalcule si l'utilisateur redimensionne la fenêtre
-  const handleResize = () => { cardWidth = getCardWidth(); }
-  window.addEventListener('resize', handleResize);
+  // Recalculate if the user resizes the window
+  const handleResize = () => { cardWidth = getCardWidth() }
+  window.addEventListener('resize', handleResize)
 
   const updateLoop = () => {
-    if (isDestroyed) return;
-    if (isReorganizing) { rafId = requestAnimationFrame(updateLoop); return; }
+    if (isDestroyed) return
+    if (isReorganizing) { rafId = requestAnimationFrame(updateLoop); return }
     
-    const distance = targetX - currentX;
+    const distance = targetX - currentX
     if (Math.abs(distance) > 0.05) {
-      currentX += distance * ease;
+      currentX += distance * ease
       
-      // On utilise cardWidth (dynamique) au lieu de CARD_WIDTH (fixe)
       if (currentX >= cardWidth || currentX <= 0) {
-        isReorganizing = true;
+        isReorganizing = true
         
         if (currentX >= cardWidth) {
-          const firstCard = track.firstElementChild;
+          const firstCard = track.firstElementChild
           if (firstCard) {
-            track.appendChild(firstCard);
-            currentX -= cardWidth;
-            targetX -= cardWidth;
+            track.appendChild(firstCard)
+            currentX -= cardWidth
+            targetX -= cardWidth
             
-            const chartEl = firstCard.querySelector(".chart");
+            const chartEl = firstCard.querySelector(".chart")
             if (chartEl && !chartEl.dataset.initialized) {
-                setTimeout(() => chartObserver.observe(chartEl), 0);
+                setTimeout(() => chartObserver.observe(chartEl), 0)
             }
           }
         } else {
-          const lastCard = track.lastElementChild;
+          const lastCard = track.lastElementChild
           if (lastCard) {
-            track.insertBefore(lastCard, track.firstElementChild);
-            currentX += cardWidth;
-            targetX += cardWidth;
+            track.insertBefore(lastCard, track.firstElementChild)
+            currentX += cardWidth
+            targetX += cardWidth
             
-            const chartEl = lastCard.querySelector(".chart");
+            const chartEl = lastCard.querySelector(".chart")
             if (chartEl && !chartEl.dataset.initialized) {
-                setTimeout(() => chartObserver.observe(chartEl), 0);
+                setTimeout(() => chartObserver.observe(chartEl), 0)
             }
           }
         }
-        requestAnimationFrame(() => { isReorganizing = false; });
+        requestAnimationFrame(() => { isReorganizing = false })
       }
-      track.style.transform = `translateX(${-currentX}px)`;
+      track.style.transform = `translateX(${-currentX}px)`
     }
-    rafId = requestAnimationFrame(updateLoop);
+    rafId = requestAnimationFrame(updateLoop)
   }
 
   rafId = requestAnimationFrame(updateLoop)
@@ -164,7 +163,7 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
   }
   carousel.addEventListener("wheel", handleWheel, { passive: false })
 
-  // scroll au doigt (mobile/tactile)
+  // touch scrolling (mobile/touchscreen)
   let touchLastX = 0
 
   const handleTouchStart = (e) => {
