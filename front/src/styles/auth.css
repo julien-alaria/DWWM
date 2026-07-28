@@ -61,72 +61,6 @@
     margin-bottom: 1rem;
 }
 
-/* Inputs */
-#login-form input[type="email"],
-#login-form input[type="password"],
-#register-form input[type="text"],
-#register-form input[type="email"],
-#register-form input[type="password"],
-#analyst-form input[type="text"],
-#analyst-form input[type="email"],
-#analyst-form input[type="password"],
-#analyst-form input[type="file"],
-#analyst-form textarea {
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    border-radius: 0.5rem;
-    font-size: var(--au-text);
-    padding: 0.75rem 0.9375rem;
-    font-family: inherit;
-}
-
-#analyst-form textarea {
-    resize: vertical;
-    min-height: 6rem;
-}
-
-#login-form input:focus,
-#register-form input:focus,
-#analyst-form input:focus,
-#analyst-form textarea:focus {
-    outline: none;
-    border-color: #03034B;
-}
-
-/* ACCESSIBILITY: restore a visible outline for keyboard navigation */
-#login-form input:focus-visible,
-#register-form input:focus-visible,
-#analyst-form input:focus-visible,
-#analyst-form textarea:focus-visible {
-    outline: 3px solid #F80505;
-    outline-offset: 2px;
-}
-
-/* Submit Button */
-#login-form input[type="submit"],
-#register-form input[type="submit"],
-#analyst-form input[type="submit"] {
-    width: 100%;
-    background-color: #03034B;
-    color: #ffffff;
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.875rem;
-    font-size: var(--au-btn);
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-}
-
-#login-form input[type="submit"]:hover,
-#register-form input[type="submit"]:hover,
-#analyst-form input[type="submit"]:hover {
-    background-color: orange;
-    color: #1a1a1a;
-}
-
 /* ANALYST FORM */
 #analyst-form fieldset {
     border: 1px solid #cccccc;
@@ -209,17 +143,18 @@
     margin-bottom: 2rem;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
- 
+
 #register-text a:hover {
     background-color: orange;
     border-color: #03034B;
     color: #1a1a1a !important;
     transform: translateY(-1px);
 }
- 
+
 #register-text a:active {
     transform: translateY(0);
 }
+
 #message {
     text-align: center;
     font-size: var(--au-text);

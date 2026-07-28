@@ -1,0 +1,109 @@
+/* GLASS FORM — shared across analyst-update-form, user-update-form */
+.glass-form input[type="text"],
+.glass-form input[type="email"],
+.glass-form input[type="password"],
+.glass-form textarea,
+.glass-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.3) 0%,
+        rgba(29, 58, 143, 0.15) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(29, 58, 143, 0.3);
+    border-radius: 0.5rem;
+    outline: none;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+}
+
+.glass-form input[type="text"]:focus,
+.glass-form input[type="email"]:focus,
+.glass-form input[type="password"]:focus,
+.glass-form textarea:focus,
+.glass-form select:focus {
+    border-color: rgba(29, 58, 143, 0.5);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.4) 0%,
+        rgba(29, 58, 143, 0.2) 100%);
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.glass-form textarea {
+    resize: vertical;
+    min-height: 6.25rem;
+}
+
+/* Submit button — dark navy glass, like #rec-form button */
+.glass-form input[type="submit"],
+.glass-form button[type="submit"] {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.875rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(180deg,
+        rgba(29, 58, 143, 0.85) 0%,
+        rgba(3, 3, 75, 0.9) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
+}
+
+.glass-form input[type="submit"]:hover,
+.glass-form button[type="submit"]:hover {
+    background: linear-gradient(180deg,
+        rgba(255, 200, 120, 0.9) 0%,
+        rgba(255, 165, 0, 0.9) 100%);
+    border-color: rgba(3, 3, 75, 0.3);
+    color: #1a1a1a;
+    box-shadow:
+        0 4px 10px rgba(3, 3, 75, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.glass-form input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--color-navy-400);
+    background: linear-gradient(180deg,
+        rgba(184, 218, 255, 0.3) 0%,
+        rgba(29, 58, 143, 0.15) 100%);
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(29, 58, 143, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow:
+        0 3px 8px rgba(3, 3, 75, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+}
+
+/* ACCESSIBILITY: visible outline for keyboard navigation */
+.glass-form input:focus-visible,
+.glass-form textarea:focus-visible,
+.glass-form select:focus-visible {
+    outline: 3px solid var(--focus-visib, #F80505);
+    outline-offset: 2px;
+}

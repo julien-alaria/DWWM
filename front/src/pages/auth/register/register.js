@@ -5,7 +5,7 @@ import http from "../../../config/instanceHttp.js"
 // =====================
 const register = ` 
     <h1 class="form-title">Register</h1>
-    <form id="register-form">
+    <form id="register-form" class="glass-form">
         <input type="text" id="name" name="name" placeholder="enter your name..." minlength="2" maxlength="50" required autocomplete="on">
 
         <input type="email" id="email" name="email" placeholder="enter your email..." required autocomplete="on">
