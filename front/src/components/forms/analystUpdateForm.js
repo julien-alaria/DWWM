@@ -1,7 +1,7 @@
 export default function analystUpdateForm() {
     return `
         <h2>Update Your Profil</h2>
-        <form method="post" id="analyst-update-form">
+        <form method="post" id="analyst-update-form" class="glass-form">
             <label for="name">Name:</label>
             <input type="text" id="analyst-name" name="name" required minlength="2" maxlength="50" autocomplete="on">
             

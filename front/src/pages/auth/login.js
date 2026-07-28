@@ -5,7 +5,7 @@ import { getRoleFromToken } from "../../middlewares/roleGuard.js"
 // HTML TEMPLATE 
 // =====================
 const login = `  
-    <form id="login-form">
+    <form id="login-form" class="glass-form">
         <h2 class="form-title">Sign In</h2>
         
         <div class="input-group">

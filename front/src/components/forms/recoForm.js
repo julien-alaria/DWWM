@@ -1,7 +1,7 @@
 export default function recoForm() {
     return `
         <h2>Create Recommendation</h2>
-            <form id="rec-form">
+            <form id="rec-form" class="glass-form">
                 <select name="status">
                     <option value="BUY">BUY</option>
                     <option value="SELL">SELL</option>
