@@ -4,7 +4,8 @@ import { renderApp } from "./src/utils/layoutManager.js"
 
 async function router() {
   // return to the top of page
-  window.scrollTo(0, 0)
+  window.document.body.scrollTo(0, 0)
+  
 
   const hash = (window.location.hash.slice(1) || "/").split("?")[0]
 
