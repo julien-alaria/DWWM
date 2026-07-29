@@ -165,18 +165,49 @@ export function enableCarouselWindow({ selector = ".carousel", getData, cardComp
 
   // touch scrolling (mobile/touchscreen)
   let touchLastX = 0
+  let touchStartX = 0
+  let touchStartY = 0
+  let isHorizontalSwipe = null // null = not yet determined for this gesture
 
   const handleTouchStart = (e) => {
-    touchLastX = e.touches[0].clientX
+    const x = e.touches[0].clientX
+    const y = e.touches[0].clientY
+    touchLastX = x
+    touchStartX = x
+    touchStartY = y
+    isHorizontalSwipe = null
   }
+
   const handleTouchMove = (e) => {
     const x = e.touches[0].clientX
-    targetX += touchLastX - x
+    const y = e.touches[0].clientY
+
+    // Decide the gesture's dominant axis once, a few pixels in (avoids
+    // jitter from a near-still finger deciding the wrong way). Once
+    // decided, stick with it for the rest of this touch sequence.
+    if (isHorizontalSwipe === null) {
+      const deltaX = Math.abs(x - touchStartX)
+      const deltaY = Math.abs(y - touchStartY)
+      if (deltaX > 6 || deltaY > 6) {
+        isHorizontalSwipe = deltaX > deltaY
+      }
+    }
+
+    if (isHorizontalSwipe) {
+      // block the page's native vertical scroll only for a horizontal
+      // carousel swipe — a vertical swipe over the carousel still scrolls
+      // the page normally, untouched
+      e.preventDefault()
+      targetX += touchLastX - x
+    }
+
     touchLastX = x
   }
 
+  // touchmove must be non-passive here: preventDefault() is silently
+  // ignored on a passive listener, and axis-locking depends on it
   carousel.addEventListener("touchstart", handleTouchStart, { passive: true })
-  carousel.addEventListener("touchmove", handleTouchMove, { passive: true })
+  carousel.addEventListener("touchmove", handleTouchMove, { passive: false })
 
   return () => {
     isDestroyed = true
