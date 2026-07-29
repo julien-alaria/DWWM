@@ -199,8 +199,12 @@ function initLocalUpdateForm(user) {
 
     const nameInput = document.getElementById("user-name")
     const emailInput = document.getElementById("user-email")
+    const passwordInput = document.getElementById("user-password")
     if (nameInput) nameInput.value = user.name ?? ""
     if (emailInput) emailInput.value = user.email ?? ""
+    // browsers sometimes autofill this as a saved login password despite
+    // autocomplete="new-password" — force it empty on load regardless
+    if (passwordInput) passwordInput.value = ""
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault()

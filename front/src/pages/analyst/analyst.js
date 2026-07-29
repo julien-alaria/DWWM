@@ -273,6 +273,11 @@ function initLocalUpdateForm(user) {
     if (el) el.value = value ?? ""
   })
 
+  // browsers sometimes autofill this as a saved login password despite
+  // autocomplete="new-password" — force it empty on load regardless
+  const passwordInput = document.getElementById("password")
+  if (passwordInput) passwordInput.value = ""
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault()
 
@@ -281,8 +286,8 @@ function initLocalUpdateForm(user) {
 
     const data = new FormData(form)
 
-    const passwordInput = data.get("password")
-    if (!passwordInput || !passwordInput.trim()) {
+    const passwordValue = data.get("password")
+    if (!passwordValue || !passwordValue.trim()) {
       data.delete("password")
     }
 

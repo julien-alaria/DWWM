@@ -34,6 +34,7 @@ const adminPage = `
 
     <section class="update-form">
         ${analystUpdateForm()}
+        <div id="update-message"></div>
     </section>
 `
 
@@ -280,8 +281,16 @@ function initForm(user) {
     const form = document.getElementById("analyst-update-form")
     if (!form) return
 
+    // browsers sometimes autofill this as a saved login password despite
+    // autocomplete="new-password" — force it empty on load regardless
+    const passwordInput = document.getElementById("password")
+    if (passwordInput) passwordInput.value = ""
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault()
+
+        const messageDiv = document.getElementById("update-message")
+        if (messageDiv) messageDiv.innerText = ""
 
         const formData = new FormData(form)
         const targetId = formData.get("target_user_id")
@@ -304,16 +313,17 @@ function initForm(user) {
         }
 
         try {
-            await http.put(url, payload)
-            alert("Profile updated")
+            const result = await http.put(url, payload)
+
+            if (messageDiv) messageDiv.innerText = result?.message || "Profile updated"
 
             const passwordField = form.querySelector('[name="password"]')
             if (passwordField) passwordField.value = ""
 
-            initAdmin()
+            setTimeout(() => initAdmin(), 800)
         } catch (err) {
             console.error("UPDATE ERROR:", err)
-            alert(err.response?.data?.message || "Update failed.")
+            if (messageDiv) messageDiv.innerText = err.response?.data?.message || "Update failed."
         }
     })
 }
