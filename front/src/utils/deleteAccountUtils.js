@@ -1,7 +1,7 @@
 import http from "../config/instanceHttp.js"
 import { openConfirmModal } from "../components/modals/confirmModal.js"
 
-// Wires the "Supprimer mon compte" button of the danger zone. Shared
+// Wires the "Delete my account" button of the danger zone. Shared
 // between user.js and analyst.js (identical behavior on both profile
 // pages) — only the confirmation message text differs per role, hence
 // the optional parameter instead of hardcoding it here.
@@ -11,11 +11,11 @@ export function initDeleteAccount(message = "Cette action est définitive. Confi
 
     btn.addEventListener("click", () => {
         openConfirmModal({
-            title: "Supprimer mon compte",
+            title: "Delete my account",
             message,
             danger: true,
-            confirmLabel: "Supprimer définitivement",
-            cancelLabel: "Annuler",
+            confirmLabel: "Permanently delete",
+            cancelLabel: "Cancel",
             onConfirm: async () => {
                 await http.delete("/users/me")
 

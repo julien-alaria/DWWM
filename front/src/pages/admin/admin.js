@@ -129,7 +129,7 @@ export async function initAdmin() {
                 <div class="user-item">
                     <span>${u.name} (${u.role})</span>
                     <button class="edit-user-btn" data-id="${u.id}">Éditer</button>
-                    <button class="delete-user-btn" data-id="${u.id}">Supprimer</button>
+                    <button class="delete-user-btn" data-id="${u.id}">Delete</button>
                 </div>
             `,
             buildUrl: () => ""

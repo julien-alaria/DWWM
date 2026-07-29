@@ -59,7 +59,7 @@ const analystPage = `
     <section class="danger-zone">
         <h2>Danger Zone</h2>
         <p>Deleting your account is permanent: your watchlist, subscriptions, recommendations, and personal data will be deleted.</p>
-        <button type="button" id="delete-account-btn" class="danger-btn">Supprimer mon compte</button>
+        <button type="button" id="delete-account-btn" class="danger-btn">Delete my account</button>
     </section>
 `
 
