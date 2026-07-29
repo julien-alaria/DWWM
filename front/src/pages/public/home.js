@@ -6,6 +6,7 @@ import commodityCard from "../../components/cards/commodityCards.js"
 import analystCard from "../../components/cards/analystCard.js"
 import { createCarousel } from "../../components/carousel/carouselComponent.js"
 import { initGenericSearchBar } from "../../components/searchBar/searchBarUtils.js"
+import { getAuthenticatedUser } from "../../middlewares/roleGuard.js"
 
 // =====================
 // HTML TEMPLATE 
@@ -67,6 +68,15 @@ export default home
 // =====================
 export async function initHome() {
     try {
+        // =====================
+        // AUTH CHECK — hide CTA buttons if logged in
+        // =====================
+        const user = getAuthenticatedUser()
+        if (user) {
+            document.getElementById("home-top-register")?.remove()
+            document.getElementById("home-middle-register")?.remove()
+        }
+        
         // =====================
         // CENTRAL DATA RECOVERY
         // =====================

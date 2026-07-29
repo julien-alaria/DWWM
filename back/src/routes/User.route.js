@@ -1,5 +1,6 @@
 import express from "express"
-import upload from "../services/multerConfig.js"
+import upload, { withUploadErrors } from "../services/multerConfig.js"
+
 import UserController from "../controllers/UserController.js"
 import AuthMiddleware from "../middlewares/authMiddleware.js"
 import AssetMiddleware from "../middlewares/assetMiddleware.js"
@@ -28,7 +29,7 @@ userRouter.get("/me/watchlist", AuthMiddleware(), UserController.getWatchlist)
 //assets follow
 userRouter.post("/me/follows", AuthMiddleware(), AssetMiddleware(), UserController.followAsset)
 // self user update
-userRouter.put("/me", AuthMiddleware(), upload.single("picture"), UserController.updateMe)
+userRouter.put("/me", AuthMiddleware(), withUploadErrors(upload.single("picture")), UserController.updateMe)
 //assets unfollow
 userRouter.delete("/me/follows/:ticker", AuthMiddleware(), AssetMiddleware(), UserController.unfollowAsset)
 // users follow
@@ -47,9 +48,9 @@ userRouter.get("/pending-analysts", AuthMiddleware(["admin"]), UserController.ge
 
 userRouter.get("/:id", AuthMiddleware(["admin"]), UserController.getUserById)
 
-userRouter.put("/:id", AuthMiddleware(["admin"]), upload.fields([ 
+userRouter.put("/:id", AuthMiddleware(["admin"]), withUploadErrors(upload.fields([ 
     { name: 'picture', maxCount: 1 }, 
-    { name: 'document', maxCount: 1 }]), UserController.updateUser)
+    { name: 'document', maxCount: 1 }])), UserController.updateUser)
 
 userRouter.delete("/:id", AuthMiddleware(["admin"]), UserController.deleteUser)
 

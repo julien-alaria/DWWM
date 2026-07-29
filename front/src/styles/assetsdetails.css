@@ -1,4 +1,5 @@
 /* TYPOGRAPHIC SCALE */
+/* Mobile */
 :root {
     --de-fs-name: 1.75rem;
     --de-fs-h2: 1.25rem;
@@ -9,10 +10,12 @@
     --de-list-img: 3rem;
     --de-card: 10rem;
     --reco-list-h: 36rem;
-    --analyst-list-h: 32rem;
+    --analyst-list-h: 15rem;
+    --reco-fs-text: 1.05rem;
+    --reco-fs-small: 0.9rem;
 }
 
-/* Tablet */
+/* Tablet 768px*/
 @media (min-width: 48rem) {
     :root {
         --de-fs-name: 2.25rem;
@@ -24,11 +27,13 @@
         --de-list-img: 3.5rem;
         --de-card: 11rem;
         --reco-list-h: 40rem;
-        --analyst-list-h: 36rem;
+        --analyst-list-h: 16.5rem;
+        --reco-fs-text: 1.15rem;
+        --reco-fs-small: 0.95rem;
     }
 }
 
-/* Desktop */
+/* Desktop 1204px*/
 @media (min-width: 64rem) {
     :root {
         --de-fs-name: 2.75rem;
@@ -40,16 +45,23 @@
         --de-list-img: 4rem;
         --de-card: 12rem;
         --reco-list-h: 44rem;
-        --analyst-list-h: 40rem;
+        --analyst-list-h: 18rem;
+        --reco-fs-text: 1.25rem;
+        --reco-fs-small: 1rem;
     }
 }
 
+/* Screens 1440px */
 @media (min-width: 90rem) {
     :root {
         --de-fs-h2: 2rem;
         --de-fs-text: 1.25rem;
         --de-fs-small: 1.05rem;
         --de-fs-list: 1.3rem;
+        --reco-fs-text: 1.35rem;      
+        --reco-fs-small: 1.1rem;     
+        --reco-list-h: 46rem;         
+        --analyst-list-h: 18rem;      
     }
 }
 
@@ -214,7 +226,8 @@
 #reco-list-container {
     display: flex;
     flex-direction: column;
-    height: 45rem;        
+    max-height: var(--reco-list-h);
+    height: auto;
     overflow-y: auto;     
     flex: none;   
     width: 100%;
@@ -235,6 +248,11 @@
     font-size: var(--de-fs-text);
     box-sizing: border-box;
     overflow: hidden;
+}
+
+#reco-list-container:has(#p-text) {
+    height: auto;
+    overflow: visible;
 }
 
 #reco-list-container .reco-image {
@@ -266,7 +284,7 @@
 #reco-list-container .reco-comment,
 #reco-list-container .reco-publish {
     margin: 0;
-    font-size: var(--de-fs-text);
+    font-size: var(--reco-fs-text);
 }
 
 #reco-list-container .reco-comment,
@@ -281,7 +299,7 @@
 }
 
 #reco-list-container .reco-publish {
-    font-size: var(--de-fs-small);
+    font-size: var(--reco-fs-small);
     color: #888888;
 }
 
@@ -295,6 +313,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 /* FORMULAIRE DE RECOMMENDATION FORM */
@@ -364,8 +383,13 @@
     flex-direction: column;
     width: 100%;
     gap: 0.25rem;
-    height: 32rem; 
+    height: var(--analyst-list-h);
     overflow-y: auto;
+}
+
+#analyst-list-container:has(#p-text) {
+    height: auto;
+    overflow: visible;
 }
 
 #analyst-list-container .analyst-item {

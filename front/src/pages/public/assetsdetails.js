@@ -171,6 +171,7 @@ export async function initDetail() {
                 targetSelector: "#recommendation-target",
                 prefix: "reco",
                 endpoint: `/recommendations?ticker=${asset.ticker}`,
+                limit: 3,
                 itemTemplate: (rec) => {
                     const defaultAvatar = "/assets/analyst/default_analyst.png"
                     const imageUrl = rec.analyst_picture ? `${API_BASE_URL}/uploads/${rec.analyst_picture}` : defaultAvatar
@@ -236,6 +237,7 @@ export async function initDetail() {
             targetSelector: "#analyst-list-target",
             prefix: "analyst",
             endpoint: `/users/analysts/by-type?type_id=${dbAsset.asset_type_id}`,
+            limit: 3,
             itemTemplate: (a) => {
                 const defaultAvatar = "/assets/analyst/default_analyst.png"
                 const imageUrl = a.picture ? `${API_BASE_URL}/uploads/${a.picture}` : defaultAvatar

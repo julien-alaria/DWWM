@@ -151,6 +151,7 @@ export async function initAnalyst() {
       targetSelector: "#recommendations-list-target",
       prefix: "recommendations",
       endpoint: "/recommendations/me",
+      limit: 3, 
       itemTemplate: (rec) => {
         const defaultAvatar = "/assets/logos/nasdaq_logo.png"
         const imageUrl = rec.ticker ? `/assets/logos/${rec.ticker.toLowerCase()}.svg` : defaultAvatar

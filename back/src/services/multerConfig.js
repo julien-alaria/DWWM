@@ -1,5 +1,6 @@
 import multer from "multer"
 import path from "path"
+import AppError from "../utils/AppError.js"
 
 // SECURITY: maps an ALLOWED mimetype to a fixed, safe extension.
 const MIME_TO_EXT = {
@@ -13,15 +14,15 @@ const MIME_TO_EXT = {
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
-    }, 
+    },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         // SECURITY: extension comes from the validated mimetype
         const ext = MIME_TO_EXT[file.mimetype] || ""
 
         // retrieve the email from the request, remove the special characters and spaces
-        const userEmail = req.body.email 
-            ? req.body.email.replace(/[@.]/g, '-').toLowerCase() 
+        const userEmail = req.body.email
+            ? req.body.email.replace(/[@.]/g, '-').toLowerCase()
             : "anonymous";
 
         // Result: picture-john-doe-gmail-com-17182938.png
@@ -51,7 +52,7 @@ const fileFilter = (req, file, cb) => {
     if (extName && mimeType) {
         return cb(null, true)
     } else {
-        cb(new Error("Only images (jpeg, jpg, png, webp) and PDF are authorized"))
+        cb(new AppError("Only images (jpeg, jpg, png, webp) and PDF are authorized"))
     }
 }
 
@@ -61,5 +62,27 @@ const upload = multer({
     fileFilter: fileFilter,
     limits: { fileSize: 5 * 1024 * 1024 } // 5 Mo
 })
+
+// Wraps any Multer middleware (upload.single(...), upload.fields([...]))
+// so that Multer-level errors (wrong format from fileFilter, file too
+// large...) become AppError instances and flow through the app's
+// central errorHandler, like any other expected error — instead of
+// crashing to a generic 500.
+export function withUploadErrors(multerMiddleware) {
+    return (req, res, next) => {
+        multerMiddleware(req, res, (err) => {
+            if (err) {
+                if (err instanceof AppError) {
+                    return next(err)
+                }
+                if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
+                    return next(new AppError("File too large. Maximum allowed size is 5 MB."))
+                }
+                return next(new AppError(err.message || "Upload error"))
+            }
+            next()
+        })
+    }
+}
 
 export default upload
