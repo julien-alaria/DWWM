@@ -30,6 +30,8 @@ userRouter.get("/me/watchlist", AuthMiddleware(), UserController.getWatchlist)
 userRouter.post("/me/follows", AuthMiddleware(), AssetMiddleware(), UserController.followAsset)
 // self user update
 userRouter.put("/me", AuthMiddleware(), withUploadErrors(upload.single("picture")), UserController.updateMe)
+// self user delete (account deletion, password required in body)
+userRouter.delete("/me", AuthMiddleware(), UserController.deleteMe)
 //assets unfollow
 userRouter.delete("/me/follows/:ticker", AuthMiddleware(), AssetMiddleware(), UserController.unfollowAsset)
 // users follow
