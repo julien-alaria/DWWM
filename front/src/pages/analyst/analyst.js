@@ -251,7 +251,7 @@ function renderAnalystInfo(user) {
   if (imageEl) {
     imageEl.src = user.picture
       ? `${API_BASE_URL}/uploads/${user.picture}`
-      : "/assets/default_analyst.png"
+      : "/assets/analyst/default_analyst.png"
     imageEl.alt = `${user.name || "analyst"}`
   }
 }
