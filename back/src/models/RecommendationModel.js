@@ -1,51 +1,6 @@
 import getConnection from "../db/connection.js"
 import AppError from "../utils/AppError.js"
 
-// async function getRecommendations(){
-//     const db = getConnection()
-
-//      const sql = `
-//         SELECT 
-//             r.id,
-//             r.status,
-//             r.comment,
-//             r.asset_id,
-//             r.user_id,
-//             u.name AS analyst_name
-//         FROM recommendations r
-//         JOIN users u ON u.id = r.user_id
-//     `
-
-//     const [rows] = await db.query(sql)
-
-//     return rows
-// }
-
-// async function getMyRecommendations(userId){
-//     const db = getConnection()
-
-//     const sql = `
-//     SELECT
-//         r.id,
-//         r.status,
-//         r.comment,
-//         r.created_at,
-//         r.asset_id,
-//         r.user_id, 
-//         a.ticker,
-//         a.name
-//     FROM recommendations r
-//     JOIN assets a
-//         ON a.id = r.asset_id
-//     WHERE r.user_id = ?
-//     ORDER BY r.created_at DESC
-//     `
-
-//     const [rows] = await db.execute(sql, [userId])
-
-//     return rows
-// }
-
 async function getMyRecommendationsPaginated(userId, limit = 2, offset = 0){
     const db = getConnection()
 
@@ -66,33 +21,6 @@ async function getMyRecommendationsPaginated(userId, limit = 2, offset = 0){
 
     return rows
 }
-
-// async function getAllRecommendations() {
-//     const db = getConnection()
-
-//     const sql = `
-//         SELECT  
-//             r.id,
-//             r.status,
-//             r.comment,
-//             r.created_at,
-//             r.asset_id,
-//             r.user_id,
-//             a.ticker,
-//             a.name,
-//             u.name AS analyst_name
-//         FROM recommendations r
-//         JOIN assets a
-//         ON a.id = r.asset_id
-//         JOIN users u ON u.id = r.user_id
-//         ORDER BY r.id DESC
-
-//     `
-
-//     const [rows] = await db.query(sql)
-
-//     return rows
-// }
 
 async function getAllRecommendationsPaginated(limit = 2, offset = 0) {
     const db = getConnection()
@@ -274,12 +202,9 @@ async function getByAnalystId(analystId, limit, offset) {
 }
 
 export default { 
-    
     getAllRecommendationsPaginated, 
-   
     getMyRecommendationsPaginated, 
     getRecommendationsById, 
-    
     getRecommendationsByAssetId, 
     getRecommendationsByAssetIdPaginated, 
     createRecommendations, 
