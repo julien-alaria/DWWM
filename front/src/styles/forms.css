@@ -100,6 +100,49 @@
     transition: all 0.2s ease;
 }
 
+/* DANGER ZONE — shared across user.js and analyst.js profile pages */
+.danger-zone {
+    width: 100%;
+    max-width: 37.5rem;
+    margin: 2rem auto;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    border: 1px solid rgba(230, 57, 70, 0.4);
+    border-radius: 0.75rem;
+    background: rgba(230, 57, 70, 0.06);
+}
+
+.danger-zone h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: #b81f2c;
+}
+
+.danger-zone p {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: #555555;
+}
+
+.danger-btn {
+    display: block;
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(180deg, #e63946 0%, #b81f2c 100%);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.danger-btn:hover {
+    background: linear-gradient(180deg, #ff5a67 0%, #d92a38 100%);
+}
+
 /* ACCESSIBILITY: visible outline for keyboard navigation */
 .glass-form input:focus-visible,
 .glass-form textarea:focus-visible,
@@ -107,3 +150,4 @@
     outline: 3px solid var(--focus-visib, #F80505);
     outline-offset: 2px;
 }
+

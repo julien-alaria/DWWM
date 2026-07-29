@@ -1,7 +1,6 @@
 import UserModel from "../models/UserModel.js"
 import generateToken from "../services/authTokenService.js"
 import { sanitizeUser, sanitizeUserUpdate } from "../utils/sanitizer.js"
-import { comparePassword } from "../utils/password.js"
 import AppError from "../utils/AppError.js"
 
 async function getUserPagin(req, res, next) {
@@ -175,26 +174,6 @@ async function updateMe(req, res, next) {
 async function deleteMe(req, res, next) {
     try {
         const id = req.user.id
-
-        const { password } = req.body
-
-        if (!password) {
-            throw new AppError("Password is required to delete your account", 400)
-        }
-
-        // req.user (set by AuthMiddleware) doesn't carry the password hash,
-        // fetch it separately, same as the login flow
-        const userWithPassword = await UserModel.getUsersByEmail(req.user.email)
-
-        if (!userWithPassword) {
-            throw new AppError("User not found", 404)
-        }
-
-        const isMatch = await comparePassword(password, userWithPassword.password)
-
-        if (!isMatch) {
-            throw new AppError("Incorrect password", 401)
-        }
 
         await UserModel.deleteUsers(id)
 

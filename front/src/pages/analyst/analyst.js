@@ -4,6 +4,7 @@ import { decodeToken } from "../../middlewares/roleGuard.js"
 import stockCard from "../../components/cards/stockCards.js"
 import analystCard from "../../components/cards/analystCard.js"
 import analystUpdateForm from "../../components/forms/analystUpdateForm.js"
+import { initDeleteAccount } from "../../utils/deleteAccountUtils.js"
 import { getStock, getForex, getCommodities } from "../../utils/assetsUtils.js"
 import { buildWatchlistData } from "../../utils/assetFormatter.js"
 import { createCarousel } from "../../components/carousel/carouselComponent.js"
@@ -53,6 +54,12 @@ const analystPage = `
         <div class="update-form">
             ${analystUpdateForm()}
         </div>
+    </section>
+
+    <section class="danger-zone">
+        <h2>Danger Zone</h2>
+        <p>Deleting your account is permanent: your watchlist, subscriptions, recommendations, and personal data will be deleted.</p>
+        <button type="button" id="delete-account-btn" class="danger-btn">Supprimer mon compte</button>
     </section>
 `
 
@@ -215,6 +222,8 @@ export async function initAnalyst() {
     // Initializing click listeners
     bindRecommendationActions("#recommendations-list-target", recommendationsPaginator)
     initLocalUpdateForm(user)
+    initDeleteAccount("This action is permanent and will delete your watchlist, subscriptions, and recommendations. Do you confirm?")
+
 
   } catch (err) {
     console.error("ANALYST INIT ERROR:", err)

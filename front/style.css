@@ -12,6 +12,7 @@
 @import "./src/styles/pagination.css";
 @import "./src/styles/about.css";
 @import "./src/styles/forms.css";
+@import "./src/styles/modal.css";
 
 :root {
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

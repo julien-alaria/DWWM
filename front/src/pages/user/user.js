@@ -5,6 +5,7 @@ import stockCard from "../../components/cards/stockCards.js"
 import analystCard from "../../components/cards/analystCard.js"
 import { getStock, getForex, getCommodities } from "../../utils/assetsUtils.js"
 import updateForm from "../../components/forms/userUpdateForm.js"
+import { initDeleteAccount } from "../../utils/deleteAccountUtils.js"
 import { createCarousel } from "../../components/carousel/carouselComponent.js"
 import { createPaginationList } from "../../components/pagination/paginationComponent.js"
 import { buildWatchlistData } from "../../utils/assetFormatter.js"
@@ -47,6 +48,13 @@ const userPage = `
             ${updateForm()}
         </div>
     </section>
+
+    <section class="danger-zone">
+        <h2>Danger Zone</h2>
+        <p>Deleting your account is permanent: your watchlist, subscriptions, and personal data will be deleted.</p>
+        <button type="button" id="delete-account-btn" class="danger-btn">Supprimer mon compte</button>
+    </section>
+
 `
 
 export default userPage
@@ -162,6 +170,7 @@ export async function initUser() {
         await followPaginator.load()
 
         initLocalUpdateForm(user)
+        initDeleteAccount("This action is irreversible and will delete your watchlist and subscriptions. Do you confirm?")
 
     } catch (err) {
         console.error("USER INIT ERROR:", err)
