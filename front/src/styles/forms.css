@@ -100,6 +100,14 @@
     transition: all 0.2s ease;
 }
 
+/* UPDATE FORM MESSAGE*/
+#update-message {
+    margin-top: 0.75rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
 /* DANGER ZONE — shared across user.js and analyst.js profile pages */
 .danger-zone {
     width: 100%;

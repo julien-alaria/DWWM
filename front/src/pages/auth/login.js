@@ -63,9 +63,6 @@ export function initLogin() {
             localStorage.setItem("token", token)
             const role = getRoleFromToken(token)
 
-            console.log("TOKEN :", token)
-            console.log("ROLE :", role)
-
             if (!role) {
                 localStorage.removeItem("token")
                 messageDiv.innerText = "Login failed. Invalid role assignment."

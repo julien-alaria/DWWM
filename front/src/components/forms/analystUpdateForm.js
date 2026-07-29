@@ -11,7 +11,7 @@ export default function analystUpdateForm() {
             <input type="email" id="analyst-email" name="email" required autocomplete="on">
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="new password..." minlength="6" maxlength="20" autocomplete="on">
+            <input type="password" id="password" name="password" placeholder="new password..." minlength="6" maxlength="20" autocomplete="new-password">
 
             <label for="company">Company:</label>
             <input type="text" id="analyst-company" name="company" maxlength="100" autocomplete="on">

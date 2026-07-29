@@ -53,6 +53,7 @@ const analystPage = `
     <section>
         <div class="update-form">
             ${analystUpdateForm()}
+            <div id="update-message"></div>
         </div>
     </section>
 
@@ -275,6 +276,9 @@ function initLocalUpdateForm(user) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault()
 
+    const messageDiv = document.getElementById("update-message")
+    if (messageDiv) messageDiv.innerText = ""
+
     const data = new FormData(form)
 
     const passwordInput = data.get("password")
@@ -287,8 +291,12 @@ function initLocalUpdateForm(user) {
       if (result && result.token) {
         localStorage.setItem("token", result.token)
       }
-      window.location.reload()
+
+      if (messageDiv) messageDiv.innerText = result?.message || "Profil mis à jour avec succès"
+
+      setTimeout(() => window.location.reload(), 800)
     } catch (err) {
+      if (messageDiv) messageDiv.innerText = err.response?.data?.message || "Échec de la mise à jour."
       console.error("UPDATE ERROR:", err)
     }
   })

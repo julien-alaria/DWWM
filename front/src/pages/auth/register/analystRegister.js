@@ -67,7 +67,6 @@ export async function initAnalystRegister() {
 
             try {
                 const result = await http.post("/auth/register", data)
-                console.log("REGISTER OK:", result)
 
                 if (result?.token) {
                     localStorage.setItem("token", result.token)

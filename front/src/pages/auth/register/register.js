@@ -43,7 +43,6 @@ export async function initRegister() {
 
             try {
                 const result = await http.post("/auth/register", data)
-                console.log("REGISTER OK:", result?.token)
 
                 if (result?.token) {
                     localStorage.setItem("token", result.token)
