@@ -122,12 +122,6 @@ export function loadMiniChart(ticker, historyData = []) {
 
   const chartColor = isPositive ? "#089981" : "#f23645"
 
-  // dropShadow (SVG filter) and the entry animation are expensive to
-  // paint/composite on mobile GPUs. Desktop keeps the full effect;
-  // mobile (< 48rem, same breakpoint as cards.css/analyst.css) gets a
-  // lighter version — same colors, curve and data, just no glow/animation.
-  const isMobile = window.matchMedia("(max-width: 47.9375rem)").matches
-
   // graphics configuration (Area with neon gradient)
   const options = {
     chart: {
@@ -137,7 +131,7 @@ export function loadMiniChart(ticker, historyData = []) {
         enabled: true
       },
       animations: {
-        enabled: !isMobile,
+        enabled: true,
         easing: "easeinout",
         dynamicAnimation: {
           speed: 600
@@ -145,7 +139,7 @@ export function loadMiniChart(ticker, historyData = []) {
       },
       background: "transparent",
       dropShadow: {
-        enabled: !isMobile,
+        enabled: true,
         top: 2,
         left: 0,
         blur: 4,
