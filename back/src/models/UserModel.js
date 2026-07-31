@@ -2,14 +2,6 @@ import getConnection from "../db/connection.js"
 import { hashPassword } from "../utils/password.js"
 import AppError from "../utils/AppError.js"
 
-// async function getUsers() {
-//     const db = getConnection()
-
-//     const [rows] = await db.query("SELECT id, name, email, role, analyst_type_id, analyst_verified, company, bio, picture FROM users")
-
-//     return rows
-// }
-
 async function getUsersPaginated(limit, offset) {
     const db = getConnection()
     
@@ -213,29 +205,6 @@ async function deleteUsers(id) {
 
     return result
 }
-
-// async function getAllAnalystsPagin(limit = 5, offset = 0) {
-//     const db = getConnection()
-    
-//     const parsedLimit = Math.max(1, Number.parseInt(limit, 10) || 5)
-//     const parsedOffset = Math.max(0, Number.parseInt(offset, 10) || 0)
-
-//     const sql = `SELECT id, name, company, bio, picture FROM users WHERE role = 'analyst' LIMIT ? OFFSET ?`
-    
-//     const [rows] = await db.query(sql, [parsedLimit + 1, parsedOffset])
-    
-//     const hasNext = rows.length > parsedLimit
-//     if (hasNext) rows.pop()
-
-//     return {
-//         results: rows,
-//         meta: {
-//             limit: parsedLimit,
-//             offset: parsedOffset,
-//             hasNext
-//         }
-//     }
-// }
 
 async function getAllAnalysts() {
     const db = getConnection()
