@@ -2,7 +2,7 @@ export default function updateForm() {
     return `
     <h2>Update Your Profil</h2>
     <form id="user-update-form" class="glass-form">
-        <label for="user-name">Nom:</label>
+        <label for="user-name">Name:</label>
         <input type="text" id="user-name" name="name" required minlength="2" maxlength="50" autocomplete="on">
 
         <label for="user-email">Email:</label>
