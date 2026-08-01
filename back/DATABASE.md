@@ -16,7 +16,7 @@
 
  FOREIGN KEY (asset_type_id)
  REFERENCES assets_types(id)
- ON DELETE CASCADE
+ ON DELETE RESTRICT
  );
 
  CREATE TABLE users (

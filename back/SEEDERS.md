@@ -48,15 +48,15 @@ VALUES
         NULL,
         NULL
     ),
-    (
-        'Seed Analyst',
-        'analyst@trader-tracker.com',
-        '$2b$12$ik.QWQiXHJCr4YSVQPw6duL5MTejUo5Hxu3.Mpr0r49sSXelH1zK6',
-        'analyst',
-        'Cabinet Claire Finance',
-        'Analyste financière spécialisée sur les valeurs technologiques.',
-        FALSE,
-        NULL,
-        NULL,
-        NULL
-    );
+     (
+        'Seed Analyst',
+        'analyst@trader-tracker.com',
+        '$2b$12$ik.QWQiXHJCr4YSVQPw6duL5MTejUo5Hxu3.Mpr0r49sSXelH1zK6',
+        'analyst',
+        'Cabinet Claire Finance',
+        'Analyste financière spécialisée sur les valeurs technologiques.',
+        FALSE,
+        2,
+        NULL,
+        NULL
+    );
