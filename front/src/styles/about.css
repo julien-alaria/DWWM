@@ -54,7 +54,8 @@
 #about-mission-title,
 #about-roles-title,
 #about-stack-title,
-#about-credits-title {
+#about-credits-title,
+#about-privacy-title {
     font-size: var(--about-h-section-title);
     color: var(--color-navy-400, #03034B);
     text-align: center;
@@ -149,6 +150,19 @@
 #about-credits-text {
     font-size: var(--about-h-section-text);
     max-width: 42rem;
+    margin: 0 0 1.5rem;
+    color: var(--color-text, #333333);
+}
+
+/* PRIVACY */
+#about-privacy {
+    align-items: center;
+    text-align: center;
+}
+
+#about-privacy-text {
+    font-size: var(--about-h-section-text);
+    max-width: 45rem;
     margin: 0 0 1.5rem;
     color: var(--color-text, #333333);
 }

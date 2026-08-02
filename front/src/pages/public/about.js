@@ -50,7 +50,7 @@ const about = `
         <ul id="about-stack-list">
             <li>Node.js &amp; Express</li>
             <li>MySQL</li>
-            <li>Vanilla JavaScript (ES6 modules, no framework)</li>
+            <li>Vanilla JavaScript (ES6 modules)</li>
             <li>Massive API for market data</li>
         </ul>
     </section>
