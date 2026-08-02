@@ -164,7 +164,7 @@ async function updateMe(req, res, next) {
 
         const result = await UserModel.updateUsers(id, sanitizedData)
 
-        res.status(200).json({ message: "Profil mis à jour avec succès", result })
+        res.status(200).json({ message: "Profile updated", result })
 
     } catch (error) {
         next(error)

@@ -219,12 +219,12 @@ function initLocalUpdateForm(user) {
             const result = await http.put("/users/me", data)
             if (result?.token) localStorage.setItem("token", result.token)
 
-            if (messageDiv) messageDiv.innerText = result?.message || "Profil mis à jour avec succès"
+            if (messageDiv) messageDiv.innerText = result?.message || "Profile updated"
 
             setTimeout(() => window.location.reload(), 800)
 
         } catch (err) {
-            if (messageDiv) messageDiv.innerText = err.response?.data?.message || "Échec de la mise à jour."
+            if (messageDiv) messageDiv.innerText = err.response?.data?.message || "Update failed."
             console.error(err)
         }
     })
