@@ -4,6 +4,7 @@ import analystUpdateForm from "../../components/forms/analystUpdateForm.js"
 import { createPaginationList } from "../../components/pagination/paginationComponent.js"
 import { bindRecommendationActions } from "../../utils/actionManager.js"
 import { escapeHtml } from "../../utils/format.js"
+import { openConfirmModal } from "../../components/modals/confirmModal.js"
 
 // =====================
 // HTML TEMPLATE 
@@ -264,12 +265,23 @@ function bindUserListEvents() {
         // Click on Delete
         if (e.target.classList.contains("delete-user-btn")) {
             const id = e.target.dataset.id
-            try {
-                await http.delete(`/users/${id}`)
-                await usersPaginator.load() // auto refesh
-            } catch (err) {
-                console.error("DELETE USER ERROR:", err)
-            }
+            const name = e.target.closest(".user-item")?.querySelector("span")?.textContent
+
+            openConfirmModal({
+                title: "Supprimer l'utilisateur",
+                message: `Supprimer définitivement ${name} ? Ses recommandations et follows seront aussi supprimés.`,
+                danger: true,
+                confirmLabel: "Supprimer",
+                cancelLabel: "Annuler",
+                onConfirm: async () => {
+                    try {
+                        await http.delete(`/users/${id}`)
+                        await usersPaginator.load() // auto refresh
+                    } catch (err) {
+                        console.error("DELETE USER ERROR:", err)
+                    }
+                }
+            })
         }
     })
 }
