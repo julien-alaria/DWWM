@@ -136,27 +136,31 @@ export async function initDetail() {
         // =====================
         // FOLLOW EVENT LISTENER
         // =====================
-        const followBtn = document.getElementById("follow-toggle-btn")
-        followBtn.addEventListener("click", async () => {
-            const currentStatus = followBtn.dataset.followed === "true"
-            const ticker = followBtn.dataset.ticker
-            followBtn.disabled = true
-            try {
-                if (currentStatus) {
-                    await http.delete(`/users/me/follows/${ticker}`)
-                    followBtn.dataset.followed = "false"
-                    followBtn.textContent = "Follow"
-                } else {
-                    await http.post("/users/me/follows", { ticker })
-                    followBtn.dataset.followed = "true"
-                    followBtn.textContent = "Unfollow"
+        if (!user) {
+                document.getElementById("follow-toggle-btn")?.remove()
+        } else {
+            const followBtn = document.getElementById("follow-toggle-btn")
+            followBtn.addEventListener("click", async () => {
+                const currentStatus = followBtn.dataset.followed === "true"
+                const ticker = followBtn.dataset.ticker
+                followBtn.disabled = true
+                try {
+                    if (currentStatus) {
+                        await http.delete(`/users/me/follows/${ticker}`)
+                        followBtn.dataset.followed = "false"
+                        followBtn.innerHTML = `<span class="follow-icon">+</span><span class="follow-text">Track Asset</span>`
+                    } else {
+                        await http.post("/users/me/follows", { ticker })
+                        followBtn.dataset.followed = "true"
+                        followBtn.innerHTML = `<span class="follow-icon">×</span><span class="follow-text">Remove</span>`
+                    }
+                } catch (err) {
+                    console.error("Follow error:", err)
+                } finally {
+                    followBtn.disabled = false
                 }
-            } catch (err) {
-                console.error("Follow error:", err)
-            } finally {
-                followBtn.disabled = false
-            }
-        })
+            })
+        }
 
         // =====================
         // CHARTS

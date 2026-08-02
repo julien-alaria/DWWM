@@ -131,7 +131,9 @@ function renderAnalyst(analyst, currentUser) {
     document.getElementById("back-btn")
         .addEventListener("click", () => history.back())
 
-    if (!isSelf) {
+     if (!currentUser) {
+        document.getElementById("follow-btn")?.remove()
+    } else if (!isSelf) {
         bindFollowButton(analyst.id)
     }
 }
