@@ -33,6 +33,9 @@ The application follows the MVC pattern by separating:
 # App screenshots
 
 ![presentation](img/trader_tracker-screencapture.png)
+
+# Technical stack and application modules
+
 ![presentation](img/trader_tracker-stack.png)
 
 # Licence
