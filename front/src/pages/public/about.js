@@ -1,3 +1,5 @@
+import { getAuthenticatedUser } from "../../middlewares/roleGuard.js"
+
 // =====================
 // HTML TEMPLATE
 // =====================
@@ -75,3 +77,22 @@ const about = `
 `
 
 export default about
+
+export async function initAbout() {
+    try {
+        // =====================
+        // AUTH CHECK — hide CTA buttons if logged in
+        // =====================
+        const user = getAuthenticatedUser()
+        if (user) {
+            document.getElementById("home-top-register")?.remove()
+            document.getElementById("home-middle-register")?.remove()
+            document.getElementById("about-cta-register")?.remove()
+        }
+
+    } catch (error) {
+        console.error("DETAILS INIT ERROR:", error)
+    }
+    
+
+}
