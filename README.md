@@ -57,16 +57,20 @@ It exposes the same routes and uses the same MySQL database — a drop-in replac
 ## Switching to the PHP backend
 
 1. Clone and set up the PHP backend — see its own README for full instructions (Composer install, `.env` configuration, database import).
+
 2. Start it:
 ```bash
    php -S localhost:8000 -t public
 ```
    (or `docker compose up --build` for a fully isolated environment with its own database)
+   
 3. Point the frontend to it, in `front/src/config/api.js`:
 ```javascript
    export const API_BASE_URL = "http://localhost:8000"
 ```
+
 4. Make sure the CORS allowed origin in the PHP backend's `public/index.php` matches the exact URL the frontend is served from — the check is strict, character for character.
+
 
 # Licence
 This project is under a proprietary license.
